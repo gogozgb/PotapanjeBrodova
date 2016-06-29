@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mreža.cs" />
     <Compile Include="Polje.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
