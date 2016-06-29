@@ -16,9 +16,9 @@ namespace TestPotapanjaBrodova
             IEnumerable<Polje> polja = m.DajRaspoloživaPolja();
             Assert.AreEqual(25, polja.Count());
             // provjeravamo postoji li (samo jedno) polje [0, 0]
-            Assert.AreEqual(1, polja.Count(p => { return p.Redak == 0 && p.Stupac == 0; }));
+            Assert.AreEqual(1, polja.Count(p => p.Redak == 0 && p.Stupac == 0));
             // provjeravamo postoji li (samo jedno) polje [4, 4]
-            Assert.AreEqual(1, polja.Count(p => { return p.Redak == 4 && p.Stupac == 4; }));
+            Assert.AreEqual(1, polja.Count(p => p.Redak == 4 && p.Stupac == 4));
         }
 
         [TestMethod]
@@ -29,7 +29,7 @@ namespace TestPotapanjaBrodova
             IEnumerable<Polje> polja = m.DajRaspoloživaPolja();
             Assert.AreEqual(24, polja.Count());
             // provjeravamo da polje [1, 3] ne postoji u listi raspoloživih polja
-            Assert.AreEqual(0, polja.Count(p => { return p.Redak == 1 && p.Stupac == 3; }));
+            Assert.AreEqual(0, polja.Count(p => p.Redak == 1 && p.Stupac == 3));
         }
     }
 }
