@@ -20,13 +20,7 @@ namespace PotapanjeBrodova
 
         public IEnumerable<Polje> DajRaspoloživaPolja()
         {
-            List<Polje> raspoloživa = new List<Polje>();
-            foreach (Polje p in polja)
-            {
-                if (p != null)
-                    raspoloživa.Add(p);
-            }
-            return raspoloživa;
+            return polja.Cast<Polje>().Where(p => p != null);
         }
 
         public void EliminirajPolje(int redak, int stupac)
