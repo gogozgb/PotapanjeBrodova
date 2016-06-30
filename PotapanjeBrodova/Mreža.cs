@@ -1,5 +1,6 @@
 ﻿// "Mreža.cs" u projektu "PotapanjeBrodova"
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PotapanjeBrodova
 {
@@ -20,13 +21,10 @@ namespace PotapanjeBrodova
         public IEnumerable<Polje> DajRaspoloživaPolja()
         {
             List<Polje> raspoloživa = new List<Polje>();
-            for (int r = 0; r < Redaka; ++r)
+            foreach (Polje p in polja)
             {
-                for (int s = 0; s < Stupaca; ++s)
-                {
-                    if (polja[r, s] != null)
-                        raspoloživa.Add(polja[r, s]);
-                }
+                if (p != null)
+                    raspoloživa.Add(p);
             }
             return raspoloživa;
         }
