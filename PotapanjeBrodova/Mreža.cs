@@ -4,13 +4,14 @@ using System.Linq;
 
 namespace PotapanjeBrodova
 {
+    using DvaDPolja = RječnikSDvaKljuča<int, int, Polje>;
+
     public class Mreža
     {
         public Mreža(int redaka, int stupaca)
         {
             Redaka = redaka;
             Stupaca = stupaca;
-            polja = new Polje[Redaka, Stupaca];
             for (int r = 0; r < Redaka; ++r)
             {
                 for (int s = 0; s < Stupaca; ++s)
@@ -20,15 +21,15 @@ namespace PotapanjeBrodova
 
         public IEnumerable<Polje> DajRaspoloživaPolja()
         {
-            return polja.Cast<Polje>().Where(p => p != null);
+            return polja.DajVrijednosti();
         }
 
         public void EliminirajPolje(int redak, int stupac)
         {
-            polja[redak, stupac] = null;
+            polja.Ukloni(redak, stupac);
         }
 
-        private Polje[,] polja;
+        private DvaDPolja polja = new DvaDPolja();
 
         public readonly int Redaka;
         public readonly int Stupaca;
