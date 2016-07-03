@@ -22,7 +22,7 @@ namespace TestPotapanjaBrodova
         }
 
         [TestMethod]
-        public void Mreža_DajRaspoloživaPolja_VraćaSamoNeeliminaranaPolja()
+        public void Mreža_EliminirajPolje_UklanjaPoljeIzMreže()
         {
             Mreža m = new Mreža(5, 5);
             m.EliminirajPolje(1, 3);
