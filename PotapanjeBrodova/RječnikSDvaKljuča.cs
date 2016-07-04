@@ -13,14 +13,14 @@ namespace PotapanjeBrodova
             set { rječnik[new Tuple<Ključ1, Ključ2>(ključ1, ključ2)] = value; }
         }
 
-        public IEnumerable<Vrijednost> DajVrijednosti()
+        public IEnumerable<Vrijednost> Vrijednosti
         {
-            return rječnik.Values;
+            get { return rječnik.Values; }
         }
 
-        public void Ukloni(Ključ1 ključ1, Ključ2 ključ2)
+        public bool Ukloni(Ključ1 ključ1, Ključ2 ključ2)
         {
-            rječnik.Remove(new Tuple<Ključ1, Ključ2>(ključ1, ključ2));
+            return rječnik.Remove(new Tuple<Ključ1, Ključ2>(ključ1, ključ2));
         }
     }
 }

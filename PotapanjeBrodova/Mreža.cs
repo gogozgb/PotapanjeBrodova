@@ -1,6 +1,6 @@
 ﻿// "Mreža.cs" u projektu "PotapanjeBrodova"
 using System.Collections.Generic;
-using System.Linq;
+using System;
 
 namespace PotapanjeBrodova
 {
@@ -21,12 +21,17 @@ namespace PotapanjeBrodova
 
         public IEnumerable<Polje> DajRaspoloživaPolja()
         {
-            return polja.DajVrijednosti();
+            return polja.Vrijednosti;
         }
 
         public void EliminirajPolje(int redak, int stupac)
         {
-            polja.Ukloni(redak, stupac);
+            if (polja.Ukloni(redak, stupac))
+                return;
+            if (redak < 0 || redak >= Redaka)
+                throw new IndexOutOfRangeException(string.Format("Redak {0} je izvan dozvoljenog rapona vrijednosti", redak));
+            if (stupac < 0 || stupac >= Stupaca)
+                throw new IndexOutOfRangeException(string.Format("Stupac {0} je izvan dozvoljenog rapona vrijednosti", stupac));
         }
 
         private DvaDPolja polja = new DvaDPolja();
