@@ -29,9 +29,9 @@ namespace PotapanjeBrodova
             if (polja.Ukloni(redak, stupac))
                 return;
             if (redak < 0 || redak >= Redaka)
-                throw new IndexOutOfRangeException(string.Format("Redak {0} je izvan dozvoljenog rapona vrijednosti", redak));
+                throw new ArgumentOutOfRangeException(string.Format("Redak {0} je izvan dozvoljenog rapona vrijednosti", redak));
             if (stupac < 0 || stupac >= Stupaca)
-                throw new IndexOutOfRangeException(string.Format("Stupac {0} je izvan dozvoljenog rapona vrijednosti", stupac));
+                throw new ArgumentOutOfRangeException(string.Format("Stupac {0} je izvan dozvoljenog rapona vrijednosti", stupac));
         }
 
         private DvaDPolja polja = new DvaDPolja();

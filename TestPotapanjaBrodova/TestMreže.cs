@@ -42,7 +42,7 @@ namespace TestPotapanjaBrodova
                 m.EliminirajPolje(5, 2);
                 Assert.Fail();
             }
-            catch (IndexOutOfRangeException)
+            catch (ArgumentOutOfRangeException)
             {
                 Assert.AreEqual(25, m.DajRaspoloživaPolja().Count());
             }
@@ -52,7 +52,7 @@ namespace TestPotapanjaBrodova
                 m.EliminirajPolje(-1, 2);
                 Assert.Fail();
             }
-            catch (IndexOutOfRangeException)
+            catch (ArgumentOutOfRangeException)
             {
                 Assert.AreEqual(25, m.DajRaspoloživaPolja().Count());
             }
@@ -67,7 +67,7 @@ namespace TestPotapanjaBrodova
                 m.EliminirajPolje(2, 5);
                 Assert.Fail();
             }
-            catch (IndexOutOfRangeException)
+            catch (ArgumentOutOfRangeException)
             {
                 Assert.AreEqual(25, m.DajRaspoloživaPolja().Count());
             }
@@ -77,7 +77,7 @@ namespace TestPotapanjaBrodova
                 m.EliminirajPolje(2, -1);
                 Assert.Fail();
             }
-            catch (IndexOutOfRangeException)
+            catch (ArgumentOutOfRangeException)
             {
                 Assert.AreEqual(25, m.DajRaspoloživaPolja().Count());
             }
