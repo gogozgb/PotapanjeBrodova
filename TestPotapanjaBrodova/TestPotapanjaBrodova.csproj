@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestBroda.cs" />
+    <Compile Include="TestFlote.cs" />
     <Compile Include="TestMreže.cs" />
     <Compile Include="TestPolja.cs" />
   </ItemGroup>

@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Brod.cs" />
+    <Compile Include="Flota.cs" />
     <Compile Include="Mreža.cs" />
     <Compile Include="Polje.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
