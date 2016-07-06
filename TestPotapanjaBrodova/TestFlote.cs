@@ -25,7 +25,7 @@ namespace TestPotapanjaBrodova
         }
 
         [TestMethod]
-        public void Flota_DodajBrod_DvaPozivDodajuDvaBroda()
+        public void Flota_DodajBrod_NakonDvaPozivaFlotaSadržiDvaBroda()
         {
             Flota f = new Flota();
             List<Polje> polja = new List<Polje>
