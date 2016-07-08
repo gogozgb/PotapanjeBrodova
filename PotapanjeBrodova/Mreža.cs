@@ -24,7 +24,7 @@ namespace PotapanjeBrodova
             return polja.Vrijednosti;
         }
 
-        public void EliminirajPolje(int redak, int stupac)
+        public void UkloniPolje(int redak, int stupac)
         {
             if (polja.Ukloni(redak, stupac))
                 return;

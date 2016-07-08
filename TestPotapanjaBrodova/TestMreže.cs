@@ -26,7 +26,7 @@ namespace TestPotapanjaBrodova
         public void Mreža_EliminirajPolje_UklanjaPoljeIzMreže()
         {
             Mreža m = new Mreža(5, 5);
-            m.EliminirajPolje(1, 3);
+            m.UkloniPolje(1, 3);
             IEnumerable<Polje> polja = m.DajRaspoloživaPolja();
             Assert.AreEqual(24, polja.Count());
             // provjeravamo da polje [1, 3] ne postoji u listi raspoloživih polja
@@ -39,7 +39,7 @@ namespace TestPotapanjaBrodova
             Mreža m = new Mreža(5, 5);
             try
             {
-                m.EliminirajPolje(5, 2);
+                m.UkloniPolje(5, 2);
                 Assert.Fail();
             }
             catch (ArgumentOutOfRangeException)
@@ -49,7 +49,7 @@ namespace TestPotapanjaBrodova
 
             try
             {
-                m.EliminirajPolje(-1, 2);
+                m.UkloniPolje(-1, 2);
                 Assert.Fail();
             }
             catch (ArgumentOutOfRangeException)
@@ -64,7 +64,7 @@ namespace TestPotapanjaBrodova
             Mreža m = new Mreža(5, 5);
             try
             {
-                m.EliminirajPolje(2, 5);
+                m.UkloniPolje(2, 5);
                 Assert.Fail();
             }
             catch (ArgumentOutOfRangeException)
@@ -74,7 +74,7 @@ namespace TestPotapanjaBrodova
 
             try
             {
-                m.EliminirajPolje(2, -1);
+                m.UkloniPolje(2, -1);
                 Assert.Fail();
             }
             catch (ArgumentOutOfRangeException)
@@ -87,8 +87,8 @@ namespace TestPotapanjaBrodova
         public void Mreža_EliminirajPolje_NeBacaIznimkuZaVećEliminiranoPoljeUnutarMreže()
         {
             Mreža m = new Mreža(5, 5);
-            m.EliminirajPolje(1, 2);
-            m.EliminirajPolje(1, 2);
+            m.UkloniPolje(1, 2);
+            m.UkloniPolje(1, 2);
             IEnumerable<Polje> polja = m.DajRaspoloživaPolja();
             Assert.AreEqual(24, polja.Count());
             Assert.AreEqual(0, polja.Count(r => r.Redak == 1 && r.Stupac == 2));
