@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿// "Proširenja.cs" u projektu "PotapanjeBrodova"
+using System.Collections.Generic;
 using System.Linq;
 
 namespace PotapanjeBrodova

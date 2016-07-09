@@ -1,4 +1,4 @@
-﻿// 'Brod.cs' u projektu 'PotapanjeBrodova'
+﻿// "Brod.cs" u projektu "PotapanjeBrodova"
 using System.Collections.Generic;
 
 namespace PotapanjeBrodova

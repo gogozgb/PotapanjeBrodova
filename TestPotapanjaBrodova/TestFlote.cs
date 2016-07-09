@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿// "TestFlote.cs" u projektu "TestPotapanjaBrodova"
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PotapanjeBrodova;
 using System;
 using System.Collections.Generic;

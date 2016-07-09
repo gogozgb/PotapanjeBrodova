@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿// "TestBrodograditelja.cs" u projektu "TestPotapanjaBrodova"
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PotapanjeBrodova;
 using System.Collections.Generic;
 using System.Linq;
