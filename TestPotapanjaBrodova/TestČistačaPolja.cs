@@ -13,12 +13,12 @@ namespace TestPotapanjaBrodova
         public void ČistačPolja_UklanjaBrodskaIOkolnaPolja()
         {
             Mreža mreža = new Mreža(10, 10);
-            ČistačPolja e = new ČistačPolja(mreža);
             List<Polje> brodskaPolja = new List<Polje>
             {
                 new Polje(4, 3), new Polje(4, 4), new Polje(4, 5), new Polje(4, 6)
             };
-            e.Ukloni(brodskaPolja);
+            ČistačPolja e = new ČistačPolja();
+            e.Ukloni(mreža, brodskaPolja);
             IEnumerable<Polje> polja = mreža.DajRaspoloživaPolja();
             Assert.AreEqual(82, polja.Count());
             // prvo provjerimo brodska polja:
@@ -37,12 +37,12 @@ namespace TestPotapanjaBrodova
         public void ČistačPolja_UklanjaBrodskaIOkolnaPoljaZaBrodULijevomGornjemKutu()
         {
             Mreža mreža = new Mreža(10, 10);
-            ČistačPolja e = new ČistačPolja(mreža);
             List<Polje> brodskaPolja = new List<Polje>
             {
                 new Polje(0, 0), new Polje(0, 1)
             };
-            e.Ukloni(brodskaPolja);
+            ČistačPolja e = new ČistačPolja();
+            e.Ukloni(mreža, brodskaPolja);
             IEnumerable<Polje> polja = mreža.DajRaspoloživaPolja();
             Assert.AreEqual(94, polja.Count());
             // prvo provjerimo brodska polja:
@@ -58,12 +58,12 @@ namespace TestPotapanjaBrodova
         public void ČistačPolja_UklanjaBrodskaIOkolnaPoljaZaBrodUDesnomDonjemKutu()
         {
             Mreža mreža = new Mreža(10, 10);
-            ČistačPolja e = new ČistačPolja(mreža);
             List<Polje> brodskaPolja = new List<Polje>
             {
                 new Polje(9, 8), new Polje(9, 9)
             };
-            e.Ukloni(brodskaPolja);
+            ČistačPolja e = new ČistačPolja();
+            e.Ukloni(mreža, brodskaPolja);
             IEnumerable<Polje> polja = mreža.DajRaspoloživaPolja();
             Assert.AreEqual(94, polja.Count());
             // prvo provjerimo brodska polja:
