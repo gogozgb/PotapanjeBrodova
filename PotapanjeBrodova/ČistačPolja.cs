@@ -9,6 +9,7 @@ namespace PotapanjeBrodova
     {
         public void Ukloni(Mreža mreža, IEnumerable<Polje> brodskaPolja)
         {
+            brodskaPolja = brodskaPolja.Sortiraj();
             Polje prvo = brodskaPolja.First();
             int r1 = Math.Max(prvo.Redak - 1, 0);
             int s1 = Math.Max(prvo.Stupac - 1, 0);
