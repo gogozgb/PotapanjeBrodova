@@ -39,6 +39,18 @@ namespace TestPotapanjaBrodova
         }
 
         [TestMethod]
+        public void Sortiraj_ZaNizOdJednogPoljaVraćaTajNiz()
+        {
+            List<Polje> polja = new List<Polje>
+            {
+                new Polje(4, 3)
+            };
+            IEnumerable<Polje> sortirana = polja.Sortiraj();
+            Assert.AreEqual(4, sortirana.First().Redak);
+            Assert.AreEqual(3, sortirana.First().Stupac);
+        }
+
+        [TestMethod]
         public void Sortiraj_ZaNeporavnatiNizPoljaBacaIznimku()
         {
             List<Polje> polja = new List<Polje>
