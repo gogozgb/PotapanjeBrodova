@@ -11,10 +11,10 @@ namespace TestPotapanjaBrodova
     public class TestMreže
     {
         [TestMethod]
-        public void Mreža_DajRaspoloživaPolja_NaPočetkuVraćaSvaPolja()
+        public void Mreža_RaspoloživaPolja_NaPočetkuVraćaSvaPolja()
         {
             Mreža m = new Mreža(5, 5);
-            IEnumerable<Polje> polja = m.DajRaspoloživaPolja();
+            IEnumerable<Polje> polja = m.RaspoloživaPolja;
             Assert.AreEqual(25, polja.Count());
             // provjeravamo postoji li (samo jedno) polje [0, 0]
             Assert.AreEqual(1, polja.Count(p => p.Redak == 0 && p.Stupac == 0));
@@ -27,7 +27,7 @@ namespace TestPotapanjaBrodova
         {
             Mreža m = new Mreža(5, 5);
             m.UkloniPolje(1, 3);
-            IEnumerable<Polje> polja = m.DajRaspoloživaPolja();
+            IEnumerable<Polje> polja = m.RaspoloživaPolja;
             Assert.AreEqual(24, polja.Count());
             // provjeravamo da polje [1, 3] ne postoji u listi raspoloživih polja
             Assert.AreEqual(0, polja.Count(p => p.Redak == 1 && p.Stupac == 3));
@@ -44,7 +44,7 @@ namespace TestPotapanjaBrodova
             }
             catch (ArgumentOutOfRangeException)
             {
-                Assert.AreEqual(25, m.DajRaspoloživaPolja().Count());
+                Assert.AreEqual(25, m.RaspoloživaPolja.Count());
             }
 
             try
@@ -54,7 +54,7 @@ namespace TestPotapanjaBrodova
             }
             catch (ArgumentOutOfRangeException)
             {
-                Assert.AreEqual(25, m.DajRaspoloživaPolja().Count());
+                Assert.AreEqual(25, m.RaspoloživaPolja.Count());
             }
         }
 
@@ -69,7 +69,7 @@ namespace TestPotapanjaBrodova
             }
             catch (ArgumentOutOfRangeException)
             {
-                Assert.AreEqual(25, m.DajRaspoloživaPolja().Count());
+                Assert.AreEqual(25, m.RaspoloživaPolja.Count());
             }
 
             try
@@ -79,7 +79,7 @@ namespace TestPotapanjaBrodova
             }
             catch (ArgumentOutOfRangeException)
             {
-                Assert.AreEqual(25, m.DajRaspoloživaPolja().Count());
+                Assert.AreEqual(25, m.RaspoloživaPolja.Count());
             }
         }
 
@@ -89,7 +89,7 @@ namespace TestPotapanjaBrodova
             Mreža m = new Mreža(5, 5);
             m.UkloniPolje(1, 2);
             m.UkloniPolje(1, 2);
-            IEnumerable<Polje> polja = m.DajRaspoloživaPolja();
+            IEnumerable<Polje> polja = m.RaspoloživaPolja;
             Assert.AreEqual(24, polja.Count());
             Assert.AreEqual(0, polja.Count(r => r.Redak == 1 && r.Stupac == 2));
         }

@@ -19,7 +19,7 @@ namespace TestPotapanjaBrodova
             };
             ČistačPolja e = new ČistačPolja();
             e.Ukloni(mreža, brodskaPolja);
-            IEnumerable<Polje> polja = mreža.DajRaspoloživaPolja();
+            IEnumerable<Polje> polja = mreža.RaspoloživaPolja;
             Assert.AreEqual(82, polja.Count());
             // prvo provjerimo brodska polja:
             Assert.AreEqual(0, polja.Count(p => p.Redak == 4 && p.Stupac == 3));
@@ -43,7 +43,7 @@ namespace TestPotapanjaBrodova
             };
             ČistačPolja e = new ČistačPolja();
             e.Ukloni(mreža, brodskaPolja);
-            IEnumerable<Polje> polja = mreža.DajRaspoloživaPolja();
+            IEnumerable<Polje> polja = mreža.RaspoloživaPolja;
             Assert.AreEqual(94, polja.Count());
             // prvo provjerimo brodska polja:
             Assert.AreEqual(0, polja.Count(p => p.Redak == 0 && p.Stupac == 0));
@@ -64,7 +64,7 @@ namespace TestPotapanjaBrodova
             };
             ČistačPolja e = new ČistačPolja();
             e.Ukloni(mreža, brodskaPolja);
-            IEnumerable<Polje> polja = mreža.DajRaspoloživaPolja();
+            IEnumerable<Polje> polja = mreža.RaspoloživaPolja;
             Assert.AreEqual(94, polja.Count());
             // prvo provjerimo brodska polja:
             Assert.AreEqual(0, polja.Count(p => p.Redak == 8 && p.Stupac == 9));

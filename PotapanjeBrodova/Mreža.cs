@@ -19,9 +19,12 @@ namespace PotapanjeBrodova
             }
         }
 
-        public IEnumerable<Polje> DajRaspoloživaPolja()
+        public IEnumerable<Polje> RaspoloživaPolja
         {
-            return polja.Vrijednosti;
+            get
+            {
+                return polja.Vrijednosti;
+            }
         }
 
         public void UkloniPolje(int redak, int stupac)

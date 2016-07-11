@@ -25,13 +25,13 @@ namespace TestPotapanjaBrodova
             // svi nizovi moraju biti duljine jednake duljini broda
             Assert.AreEqual(true, nizovi.All(n => n.Count() == duljina));
             // polje [0, 0] smije se pojaviti samo jednom
-            Assert.AreEqual(1, nizovi.Count(n => n.Any(p => p.Redak == 0 && p.Stupac == 0)));
+            Assert.AreEqual(1, nizovi.Count(n => n.Contains(new Polje(0, 0))));
             // polje [0, 1] mora se pojaviti dva puta
-            Assert.AreEqual(2, nizovi.Count(n => n.Any(p => p.Redak == 0 && p.Stupac == 1)));
+            Assert.AreEqual(2, nizovi.Count(n => n.Contains(new Polje(0, 1))));
             // polje [0, 2] mora se pojaviti dva puta
-            Assert.AreEqual(2, nizovi.Count(n => n.Any(p => p.Redak == 0 && p.Stupac == 2)));
+            Assert.AreEqual(2, nizovi.Count(n => n.Contains(new Polje(0, 2))));
             // polje [0, 3] smije se pojaviti samo jednom
-            Assert.AreEqual(1, nizovi.Count(n => n.Any(p => p.Redak == 0 && p.Stupac == 3)));
+            Assert.AreEqual(1, nizovi.Count(n => n.Contains(new Polje(0, 3))));
         }
 
         [TestMethod]
@@ -48,15 +48,15 @@ namespace TestPotapanjaBrodova
             // svi nizovi moraju biti duljine jednake duljini broda
             Assert.AreEqual(true, nizovi.All(n => n.Count() == duljina));
             // polje [0, 0] smije se pojaviti samo jednom
-            Assert.AreEqual(1, nizovi.Count(n => n.Any(p => p.Redak == 0 && p.Stupac == 0)));
+            Assert.AreEqual(1, nizovi.Count(n => n.Contains(new Polje(0, 0))));
             // polje [1, 0] mora se pojaviti dva puta
-            Assert.AreEqual(2, nizovi.Count(n => n.Any(p => p.Redak == 1 && p.Stupac == 0)));
+            Assert.AreEqual(2, nizovi.Count(n => n.Contains(new Polje(1, 0))));
             // polje [2, 0] mora se pojaviti tri puta
-            Assert.AreEqual(3, nizovi.Count(n => n.Any(p => p.Redak == 2 && p.Stupac == 0)));
+            Assert.AreEqual(3, nizovi.Count(n => n.Contains(new Polje(2, 0))));
             // polje [3, 0] smije se pojaviti dva puta
-            Assert.AreEqual(2, nizovi.Count(n => n.Any(p => p.Redak == 3 && p.Stupac == 0)));
+            Assert.AreEqual(2, nizovi.Count(n => n.Contains(new Polje(3, 0))));
             // polje [4, 0] smije se pojaviti samo jednom
-            Assert.AreEqual(1, nizovi.Count(n => n.Any(p => p.Redak == 4 && p.Stupac == 0)));
+            Assert.AreEqual(1, nizovi.Count(n => n.Contains(new Polje(4, 0))));
         }
 
         [TestMethod]
