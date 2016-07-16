@@ -11,12 +11,10 @@ namespace PotapanjeBrodova
 
     public class TražilicaNizovaPolja
     {
-        public NizoviPolja DajNizove(IEnumerable<Polje> raspoloživaPolja, int duljina)
+        public NizoviPolja DajNizovePolja(IEnumerable<Polje> raspoloživaPolja, int duljina)
         {
-            ListePolja nizovi = new ListePolja();
-            nizovi.AddRange(DajHorizontalneNizove(raspoloživaPolja, duljina));
-            nizovi.AddRange(DajVertikalneNizove(raspoloživaPolja, duljina));
-            return nizovi;
+            return DajHorizontalneNizove(raspoloživaPolja, duljina)
+                .Concat(DajVertikalneNizove(raspoloživaPolja, duljina));
         }
 
         private ListePolja DajHorizontalneNizove(IEnumerable<Polje> raspoloživa, int duljina)
@@ -24,8 +22,8 @@ namespace PotapanjeBrodova
             ListePolja liste = new ListePolja();
             foreach (Polje početno in raspoloživa)
             {
-                List<Polje> polja = DajPoljaDesno(početno, raspoloživa, duljina);
-                if (polja.Count > 0)
+                List<Polje> polja = PoljaUdesno(početno, raspoloživa, duljina);
+                if (polja.Count == duljina)
                     liste.Add(polja);
             }
             return liste;
@@ -36,16 +34,15 @@ namespace PotapanjeBrodova
             ListePolja liste = new ListePolja();
             foreach (Polje početno in raspoloživa)
             {
-                List<Polje> polja = DajPoljaIspod(početno, raspoloživa, duljina);
-                if (polja.Count > 0)
+                List<Polje> polja = PoljaNadolje(početno, raspoloživa, duljina);
+                if (polja.Count == duljina)
                     liste.Add(polja);
             }
             return liste;
         }
 
-        private List<Polje> DajPoljaDesno(Polje polje, IEnumerable<Polje> raspoloživa, int duljina)
+        private List<Polje> PoljaUdesno(Polje polje, IEnumerable<Polje> raspoloživa, int duljina)
         {
-            // polje od kojeg krećemo je također u listi
             List<Polje> polja = new List<Polje> { polje };
             int redak = polje.Redak;
             int stupac = polje.Stupac;
@@ -53,13 +50,13 @@ namespace PotapanjeBrodova
             {
                 Polje nađeno = raspoloživa.FirstOrDefault(p => p.Redak == redak && p.Stupac == s);
                 if (nađeno == null)
-                    return new List<Polje>();
+                    break;
                 polja.Add(nađeno);
             }
             return polja;
         }
 
-        private List<Polje> DajPoljaIspod(Polje polje, IEnumerable<Polje> raspoloživa, int duljina)
+        private List<Polje> PoljaNadolje(Polje polje, IEnumerable<Polje> raspoloživa, int duljina)
         {
             List<Polje> polja = new List<Polje> { polje };
             int redak = polje.Redak;
@@ -68,7 +65,7 @@ namespace PotapanjeBrodova
             {
                 Polje nađeno = raspoloživa.FirstOrDefault(p => p.Redak == r && p.Stupac == stupac);
                 if (nađeno == null)
-                    return new List<Polje>();
+                    break;
                 polja.Add(nađeno);
             }
             return polja;
