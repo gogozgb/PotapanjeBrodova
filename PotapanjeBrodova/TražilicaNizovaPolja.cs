@@ -8,67 +8,58 @@ namespace PotapanjeBrodova
     // skraćeni sinonimi
     using NizoviPolja = IEnumerable<IEnumerable<Polje>>;
     using ListePolja = List<List<Polje>>;
+    using IteratorPolja = Func<Polje, int, IEnumerable<Polje>>;
 
     public class TražilicaNizovaPolja
     {
-        public NizoviPolja DajNizovePolja(IEnumerable<Polje> raspoloživaPolja, int duljina)
+        public TražilicaNizovaPolja(IEnumerable<Polje> raspoloživaPolja)
         {
-            return DajHorizontalneNizove(raspoloživaPolja, duljina)
-                .Concat(DajVertikalneNizove(raspoloživaPolja, duljina));
+            this.raspoloživaPolja = raspoloživaPolja;
         }
 
-        private ListePolja DajHorizontalneNizove(IEnumerable<Polje> raspoloživa, int duljina)
+        public NizoviPolja DajNizovePolja(int duljina)
+        {
+            return DajNizove(duljina, PoljaDesno)
+                .Concat(DajNizove(duljina, PoljaDolje));
+        }
+
+        private ListePolja DajNizove(int duljina, IteratorPolja traženaPolja)
         {
             ListePolja liste = new ListePolja();
-            foreach (Polje početno in raspoloživa)
+            foreach (Polje početno in raspoloživaPolja)
             {
-                List<Polje> polja = PoljaUdesno(početno, raspoloživa, duljina);
+                List<Polje> polja = PoljaUNizu(početno, duljina, traženaPolja);
                 if (polja.Count == duljina)
                     liste.Add(polja);
             }
             return liste;
         }
 
-        private ListePolja DajVertikalneNizove(IEnumerable<Polje> raspoloživa, int duljina)
-        {
-            ListePolja liste = new ListePolja();
-            foreach (Polje početno in raspoloživa)
-            {
-                List<Polje> polja = PoljaNadolje(početno, raspoloživa, duljina);
-                if (polja.Count == duljina)
-                    liste.Add(polja);
-            }
-            return liste;
-        }
-
-        private List<Polje> PoljaUdesno(Polje polje, IEnumerable<Polje> raspoloživa, int duljina)
+        private List<Polje> PoljaUNizu(Polje polje, int duljina, IteratorPolja traženaPolja)
         {
             List<Polje> polja = new List<Polje> { polje };
-            int redak = polje.Redak;
+            foreach (Polje traženo in traženaPolja(polje, duljina))
+            {
+                if (raspoloživaPolja.Contains(traženo))
+                    polja.Add(traženo);
+            }
+            return polja;
+        }
+
+        private IEnumerable<Polje> PoljaDesno(Polje polje, int duljina)
+        {
             int stupac = polje.Stupac;
             for (int s = stupac + 1; s < stupac + duljina; ++s)
-            {
-                Polje nađeno = raspoloživa.FirstOrDefault(p => p.Redak == redak && p.Stupac == s);
-                if (nađeno == null)
-                    break;
-                polja.Add(nađeno);
-            }
-            return polja;
+                yield return new Polje(polje.Redak, s);
         }
 
-        private List<Polje> PoljaNadolje(Polje polje, IEnumerable<Polje> raspoloživa, int duljina)
+        private IEnumerable<Polje> PoljaDolje(Polje polje, int duljina)
         {
-            List<Polje> polja = new List<Polje> { polje };
             int redak = polje.Redak;
-            int stupac = polje.Stupac;
             for (int r = redak + 1; r < redak + duljina; ++r)
-            {
-                Polje nađeno = raspoloživa.FirstOrDefault(p => p.Redak == r && p.Stupac == stupac);
-                if (nađeno == null)
-                    break;
-                polja.Add(nađeno);
-            }
-            return polja;
+                yield return new Polje(r, polje.Stupac);
         }
+
+        private IEnumerable<Polje> raspoloživaPolja;
     }
 }
