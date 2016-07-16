@@ -30,7 +30,7 @@ namespace TestPotapanjaBrodova
             IEnumerable<Polje> polja = m.RaspoloživaPolja;
             Assert.AreEqual(24, polja.Count());
             // provjeravamo da polje [1, 3] ne postoji u listi raspoloživih polja
-            Assert.AreEqual(0, polja.Count(p => p.Redak == 1 && p.Stupac == 3));
+            Assert.IsFalse(polja.Contains(new Polje(1, 3)));
         }
 
         [TestMethod]
@@ -91,7 +91,7 @@ namespace TestPotapanjaBrodova
             m.UkloniPolje(1, 2);
             IEnumerable<Polje> polja = m.RaspoloživaPolja;
             Assert.AreEqual(24, polja.Count());
-            Assert.AreEqual(0, polja.Count(r => r.Redak == 1 && r.Stupac == 2));
+            Assert.IsFalse(polja.Contains(new Polje(1, 2)));
         }
     }
 }

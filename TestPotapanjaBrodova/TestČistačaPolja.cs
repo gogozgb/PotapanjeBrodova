@@ -22,15 +22,15 @@ namespace TestPotapanjaBrodova
             IEnumerable<Polje> polja = mreža.RaspoloživaPolja;
             Assert.AreEqual(82, polja.Count());
             // prvo provjerimo brodska polja:
-            Assert.AreEqual(0, polja.Count(p => p.Redak == 4 && p.Stupac == 3));
-            Assert.AreEqual(0, polja.Count(p => p.Redak == 4 && p.Stupac == 4));
-            Assert.AreEqual(0, polja.Count(p => p.Redak == 4 && p.Stupac == 5));
-            Assert.AreEqual(0, polja.Count(p => p.Redak == 4 && p.Stupac == 6));
+            Assert.IsFalse(polja.Contains(new Polje(4, 3)));
+            Assert.IsFalse(polja.Contains(new Polje(4, 4)));
+            Assert.IsFalse(polja.Contains(new Polje(4, 5)));
+            Assert.IsFalse(polja.Contains(new Polje(4, 6)));
             // potom provjerimo okolna polja (samo u uglovima):
-            Assert.AreEqual(0, polja.Count(p => p.Redak == 3 && p.Stupac == 2));
-            Assert.AreEqual(0, polja.Count(p => p.Redak == 3 && p.Stupac == 7));
-            Assert.AreEqual(0, polja.Count(p => p.Redak == 5 && p.Stupac == 2));
-            Assert.AreEqual(0, polja.Count(p => p.Redak == 5 && p.Stupac == 7));
+            Assert.IsFalse(polja.Contains(new Polje(3, 2)));
+            Assert.IsFalse(polja.Contains(new Polje(3, 7)));
+            Assert.IsFalse(polja.Contains(new Polje(5, 2)));
+            Assert.IsFalse(polja.Contains(new Polje(5, 7)));
         }
 
         [TestMethod]
@@ -46,12 +46,12 @@ namespace TestPotapanjaBrodova
             IEnumerable<Polje> polja = mreža.RaspoloživaPolja;
             Assert.AreEqual(94, polja.Count());
             // prvo provjerimo brodska polja:
-            Assert.AreEqual(0, polja.Count(p => p.Redak == 0 && p.Stupac == 0));
-            Assert.AreEqual(0, polja.Count(p => p.Redak == 0 && p.Stupac == 1));
+            Assert.IsFalse(polja.Contains(new Polje(0, 0)));
+            Assert.IsFalse(polja.Contains(new Polje(0, 1)));
             // potom provjerimo okolna polja (samo u uglovima):
-            Assert.AreEqual(0, polja.Count(p => p.Redak == 1 && p.Stupac == 0));
-            Assert.AreEqual(0, polja.Count(p => p.Redak == 1 && p.Stupac == 2));
-            Assert.AreEqual(0, polja.Count(p => p.Redak == 0 && p.Stupac == 2));
+            Assert.IsFalse(polja.Contains(new Polje(1, 0)));
+            Assert.IsFalse(polja.Contains(new Polje(1, 2)));
+            Assert.IsFalse(polja.Contains(new Polje(0, 2)));
         }
 
         [TestMethod]
@@ -67,12 +67,12 @@ namespace TestPotapanjaBrodova
             IEnumerable<Polje> polja = mreža.RaspoloživaPolja;
             Assert.AreEqual(94, polja.Count());
             // prvo provjerimo brodska polja:
-            Assert.AreEqual(0, polja.Count(p => p.Redak == 8 && p.Stupac == 9));
-            Assert.AreEqual(0, polja.Count(p => p.Redak == 9 && p.Stupac == 9));
+            Assert.IsFalse(polja.Contains(new Polje(8, 9)));
+            Assert.IsFalse(polja.Contains(new Polje(9, 9)));
             // potom provjerimo okolna polja (samo u uglovima):
-            Assert.AreEqual(0, polja.Count(p => p.Redak == 9 && p.Stupac == 7));
-            Assert.AreEqual(0, polja.Count(p => p.Redak == 8 && p.Stupac == 7));
-            Assert.AreEqual(0, polja.Count(p => p.Redak == 8 && p.Stupac == 9));
+            Assert.IsFalse(polja.Contains(new Polje(9, 7)));
+            Assert.IsFalse(polja.Contains(new Polje(8, 7)));
+            Assert.IsFalse(polja.Contains(new Polje(8, 9)));
         }
     }
 }
