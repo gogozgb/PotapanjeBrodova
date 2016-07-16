@@ -11,7 +11,7 @@ namespace PotapanjeBrodova
 
     public class TražilicaNizovaPolja
     {
-        public NizoviPolja DajNizovePolja(IEnumerable<Polje> raspoloživaPolja, int duljina)
+        public NizoviPolja DajNizove(IEnumerable<Polje> raspoloživaPolja, int duljina)
         {
             ListePolja nizovi = new ListePolja();
             nizovi.AddRange(DajHorizontalneNizove(raspoloživaPolja, duljina));

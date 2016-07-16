@@ -20,7 +20,7 @@ namespace TestPotapanjaBrodova
             };
             int duljina = 3;
             TražilicaNizovaPolja tražilica = new TražilicaNizovaPolja();
-            NizoviPolja nizovi = tražilica.DajNizovePolja(polja, duljina);
+            NizoviPolja nizovi = tražilica.DajNizove(polja, duljina);
             Assert.AreEqual(2, nizovi.Count());
             // svi nizovi moraju biti duljine jednake duljini broda
             Assert.AreEqual(true, nizovi.All(n => n.Count() == duljina));
@@ -43,7 +43,7 @@ namespace TestPotapanjaBrodova
             };
             int duljina = 3;
             TražilicaNizovaPolja tražilica = new TražilicaNizovaPolja();
-            NizoviPolja nizovi = tražilica.DajNizovePolja(polja, duljina);
+            NizoviPolja nizovi = tražilica.DajNizove(polja, duljina);
             Assert.AreEqual(3, nizovi.Count());
             // svi nizovi moraju biti duljine jednake duljini broda
             Assert.AreEqual(true, nizovi.All(n => n.Count() == duljina));
@@ -68,7 +68,7 @@ namespace TestPotapanjaBrodova
             };
             int duljina = 4;
             TražilicaNizovaPolja tražilica = new TražilicaNizovaPolja();
-            NizoviPolja nizovi = tražilica.DajNizovePolja(polja, duljina);
+            NizoviPolja nizovi = tražilica.DajNizove(polja, duljina);
             Assert.AreEqual(0, nizovi.Count());
         }
     }
