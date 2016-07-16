@@ -5,42 +5,47 @@ using System.Linq;
 
 namespace PotapanjeBrodova
 {
+    // skraćeni sinonimi
+    using NizoviPolja = IEnumerable<IEnumerable<Polje>>;
+    using ListePolja = List<List<Polje>>;
+
     public class TražilicaNizovaPolja
     {
-        public IEnumerable<IEnumerable<Polje>> DajNizovePolja(IEnumerable<Polje> raspoloživaPolja, int duljina)
+        public NizoviPolja DajNizovePolja(IEnumerable<Polje> raspoloživaPolja, int duljina)
         {
-            List<List<Polje>> nizovi = new List<List<Polje>>();
-            nizovi.AddRange(DajHorizontalneNizovePolja(raspoloživaPolja, duljina));
-            nizovi.AddRange(DajVertikalneNizovePolja(raspoloživaPolja, duljina));
+            ListePolja nizovi = new ListePolja();
+            nizovi.AddRange(DajHorizontalneNizove(raspoloživaPolja, duljina));
+            nizovi.AddRange(DajVertikalneNizove(raspoloživaPolja, duljina));
             return nizovi;
         }
 
-        private List<List<Polje>> DajHorizontalneNizovePolja(IEnumerable<Polje> raspoloživa, int duljina)
+        private ListePolja DajHorizontalneNizove(IEnumerable<Polje> raspoloživa, int duljina)
         {
-            List<List<Polje>> nizovi = new List<List<Polje>>();
+            ListePolja liste = new ListePolja();
             foreach (Polje početno in raspoloživa)
             {
                 List<Polje> polja = DajPoljaDesno(početno, raspoloživa, duljina);
                 if (polja.Count > 0)
-                    nizovi.Add(polja);
+                    liste.Add(polja);
             }
-            return nizovi;
+            return liste;
         }
 
-        private List<List<Polje>> DajVertikalneNizovePolja(IEnumerable<Polje> raspoloživa, int duljina)
+        private ListePolja DajVertikalneNizove(IEnumerable<Polje> raspoloživa, int duljina)
         {
-            List<List<Polje>> nizovi = new List<List<Polje>>();
+            ListePolja liste = new ListePolja();
             foreach (Polje početno in raspoloživa)
             {
                 List<Polje> polja = DajPoljaIspod(početno, raspoloživa, duljina);
                 if (polja.Count > 0)
-                    nizovi.Add(polja);
+                    liste.Add(polja);
             }
-            return nizovi;
+            return liste;
         }
 
         private List<Polje> DajPoljaDesno(Polje polje, IEnumerable<Polje> raspoloživa, int duljina)
         {
+            // polje od kojeg krećemo je također u listi
             List<Polje> polja = new List<Polje> { polje };
             int redak = polje.Redak;
             int stupac = polje.Stupac;
@@ -68,6 +73,5 @@ namespace PotapanjeBrodova
             }
             return polja;
         }
-
     }
 }
