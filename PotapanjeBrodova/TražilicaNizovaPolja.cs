@@ -7,8 +7,8 @@ namespace PotapanjeBrodova
 {
     // skraćeni sinonimi
     using NizoviPolja = IEnumerable<IEnumerable<Polje>>;
-    using ListePolja = List<List<Polje>>;
-    using IteratorPolja = Func<Polje, int, IEnumerable<Polje>>;
+    using ListePolja = List<IEnumerable<Polje>>;
+    using PopisPolja = Func<Polje, int, IEnumerable<Polje>>;
 
     public class TražilicaNizovaPolja
     {
@@ -25,44 +25,38 @@ namespace PotapanjeBrodova
                 .Concat(DajNizove(duljina, PoljaDolje, DovoljnoOdmaknutoOdNajdonjeg));
         }
 
-        private ListePolja DajNizove(int duljina, IteratorPolja traženaPolja, Func<Polje, int, bool> dovoljnoOdmaknuto)
+        private NizoviPolja DajNizove(int duljina, PopisPolja traženaPolja, Func<Polje, int, bool> dovoljnoOdmaknuto)
         {
             ListePolja liste = new ListePolja();
             foreach (Polje početno in raspoloživaPolja)
             {
                 if (dovoljnoOdmaknuto(početno, duljina - 1))
                 {
-                    List<Polje> polja = PoljaUNizu(početno, duljina, traženaPolja);
-                    if (polja.Count == duljina)
+                    List<Polje> polja = new List<Polje> { početno };
+                    polja.AddRange(raspoloživaPolja.Intersect(traženaPolja(početno, duljina)));
+                    if (polja.Count() == duljina)
                         liste.Add(polja);
                 }
             }
             return liste;
         }
 
-        private List<Polje> PoljaUNizu(Polje polje, int duljina, IteratorPolja traženaPolja)
-        {
-            List<Polje> polja = new List<Polje> { polje };
-            foreach (Polje traženo in traženaPolja(polje, duljina))
-            {
-                if (raspoloživaPolja.Contains(traženo))
-                    polja.Add(traženo);
-            }
-            return polja;
-        }
-
         private IEnumerable<Polje> PoljaDesno(Polje polje, int duljina)
         {
+            List<Polje> polja = new List<Polje>();
             int stupac = polje.Stupac;
             for (int s = stupac + 1; s < stupac + duljina; ++s)
-                yield return new Polje(polje.Redak, s);
+                polja.Add(new Polje(polje.Redak, s));
+            return polja;
         }
 
         private IEnumerable<Polje> PoljaDolje(Polje polje, int duljina)
         {
+            List<Polje> polja = new List<Polje>();
             int redak = polje.Redak;
             for (int r = redak + 1; r < redak + duljina; ++r)
-                yield return new Polje(r, polje.Stupac);
+                polja.Add(new Polje(r, polje.Stupac));
+            return polja;
         }
 
         private bool DovoljnoOdmaknutoOdNajdesnijeg(Polje polje, int duljina)
