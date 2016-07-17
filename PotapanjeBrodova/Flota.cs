@@ -1,13 +1,9 @@
 ﻿// "Flota.cs" u projektu "PotapanjeBrodova"
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PotapanjeBrodova
 {
-public class Flota
+    public class Flota
 {
     public void DodajBrod(IEnumerable<Polje> polja)
     {
