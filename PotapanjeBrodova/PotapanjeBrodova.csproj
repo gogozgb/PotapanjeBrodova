@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Brod.cs" />
     <Compile Include="Brodograditelj.cs" />
+    <Compile Include="NasumičniIzbornikPolja.cs" />
     <Compile Include="TražilicaNizovaPolja.cs" />
     <Compile Include="Proširenja.cs" />
     <Compile Include="ČistačPolja.cs" />
