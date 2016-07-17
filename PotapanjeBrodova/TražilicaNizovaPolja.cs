@@ -15,22 +15,27 @@ namespace PotapanjeBrodova
         public TražilicaNizovaPolja(IEnumerable<Polje> raspoloživaPolja)
         {
             this.raspoloživaPolja = raspoloživaPolja;
+            najdesnijiStupac = raspoloživaPolja.Max(p => p.Stupac);
+            najdonjiRedak = raspoloživaPolja.Max(p => p.Redak);
         }
 
         public NizoviPolja DajNizovePolja(int duljina)
         {
-            return DajNizove(duljina, PoljaDesno)
-                .Concat(DajNizove(duljina, PoljaDolje));
+            return DajNizove(duljina, PoljaDesno, DovoljnoOdmaknutoOdNajdesnijeg)
+                .Concat(DajNizove(duljina, PoljaDolje, DovoljnoOdmaknutoOdNajdonjeg));
         }
 
-        private ListePolja DajNizove(int duljina, IteratorPolja traženaPolja)
+        private ListePolja DajNizove(int duljina, IteratorPolja traženaPolja, Func<Polje, int, bool> dovoljnoOdmaknuto)
         {
             ListePolja liste = new ListePolja();
             foreach (Polje početno in raspoloživaPolja)
             {
-                List<Polje> polja = PoljaUNizu(početno, duljina, traženaPolja);
-                if (polja.Count == duljina)
-                    liste.Add(polja);
+                if (dovoljnoOdmaknuto(početno, duljina - 1))
+                {
+                    List<Polje> polja = PoljaUNizu(početno, duljina, traženaPolja);
+                    if (polja.Count == duljina)
+                        liste.Add(polja);
+                }
             }
             return liste;
         }
@@ -60,6 +65,18 @@ namespace PotapanjeBrodova
                 yield return new Polje(r, polje.Stupac);
         }
 
+        private bool DovoljnoOdmaknutoOdNajdesnijeg(Polje polje, int duljina)
+        {
+            return polje.Stupac <= najdesnijiStupac - duljina;
+        }
+
+        private bool DovoljnoOdmaknutoOdNajdonjeg(Polje polje, int duljina)
+        {
+            return polje.Redak <= najdonjiRedak - duljina;
+        }
+
         private IEnumerable<Polje> raspoloživaPolja;
+        private int najdesnijiStupac;
+        private int najdonjiRedak;
     }
 }
