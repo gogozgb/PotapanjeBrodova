@@ -36,10 +36,9 @@ namespace PotapanjeBrodova
         private Flota SložiBrodove(Mreža mreža, IEnumerable<int> duljineBrodova)
         {
             Flota f = new Flota();
+            var tražilica = new TražilicaNizovaPolja(mreža);
             foreach (int duljina in duljineBrodova)
             {
-                var raspoloživa = mreža.RaspoloživaPolja;
-                var tražilica = new TražilicaNizovaPolja(raspoloživa);
                 var kandidati = tražilica.DajNizovePolja(duljina);
                 if (kandidati.Count() == 0)
                     throw new ApplicationException();

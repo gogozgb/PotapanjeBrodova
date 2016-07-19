@@ -14,12 +14,9 @@ namespace TestPotapanjaBrodova
         [TestMethod]
         public void TražilicaNizovaPolja_Vraća2NizaDuljine3ZaHorizontalniNiz4Polja()
         {
-            List<Polje> polja = new List<Polje>
-            {
-                new Polje(0, 0), new Polje(0, 1), new Polje(0, 2), new Polje(0, 3)
-            };
+            Mreža mreža = new Mreža(1, 4);
             int duljina = 3;
-            TražilicaNizovaPolja tražilica = new TražilicaNizovaPolja(polja);
+            TražilicaNizovaPolja tražilica = new TražilicaNizovaPolja(mreža);
             NizoviPolja nizovi = tražilica.DajNizovePolja(duljina);
             Assert.AreEqual(2, nizovi.Count());
             // svi nizovi moraju biti duljine jednake duljini broda
@@ -37,12 +34,9 @@ namespace TestPotapanjaBrodova
         [TestMethod]
         public void TražilicaNizovaPolja_Vraća3NizaDuljine3ZaVertikalniNiz5Polja()
         {
-            List<Polje> polja = new List<Polje>
-            {
-                new Polje(0, 0), new Polje(1, 0), new Polje(2, 0), new Polje(3, 0), new Polje(4, 0)
-            };
+            Mreža mreža = new Mreža(5, 1);
             int duljina = 3;
-            TražilicaNizovaPolja tražilica = new TražilicaNizovaPolja(polja);
+            TražilicaNizovaPolja tražilica = new TražilicaNizovaPolja(mreža);
             NizoviPolja nizovi = tražilica.DajNizovePolja(duljina);
             Assert.AreEqual(3, nizovi.Count());
             // svi nizovi moraju biti duljine jednake duljini broda
@@ -62,12 +56,9 @@ namespace TestPotapanjaBrodova
         [TestMethod]
         public void TražilicaNizovaPolja_VraćaPrazanNizAkoNemaDovoljnoSlobodnihPolja()
         {
-            List<Polje> polja = new List<Polje>
-            {
-                new Polje(0, 0), new Polje(0, 1), new Polje(0, 2)
-            };
+            Mreža mreža = new Mreža(1, 3);
             int duljina = 4;
-            TražilicaNizovaPolja tražilica = new TražilicaNizovaPolja(polja);
+            TražilicaNizovaPolja tražilica = new TražilicaNizovaPolja(mreža);
             NizoviPolja nizovi = tražilica.DajNizovePolja(duljina);
             Assert.AreEqual(0, nizovi.Count());
         }
