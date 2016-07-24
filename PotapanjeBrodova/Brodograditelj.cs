@@ -13,7 +13,7 @@ namespace PotapanjeBrodova
                                 IEnumerable<int> duljineBrodova)
         {
             duljineBrodova = duljineBrodova.OrderByDescending(d => d);
-            const int brojPokušaja = 100;
+            const int brojPokušaja = 5;
             for (int i = 0; i < brojPokušaja; ++i)
             {
                 Mreža mreža = new Mreža(redaka, stupaca);
