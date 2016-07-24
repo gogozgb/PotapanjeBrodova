@@ -5,51 +5,56 @@ using System.Linq;
 
 namespace PotapanjeBrodova
 {
+    using NizoviPolja = IEnumerable<IEnumerable<Polje>>;
+
     public class Brodograditelj
     {
-        public Brodograditelj()
+        public Flota SložiFlotu(int redaka, int stupaca,
+                                IEnumerable<int> duljineBrodova)
         {
-            izbornik = new NasumičniIzbornikPolja();
-            čistač = new ČistačPolja();
-        }
-
-        public Flota SložiFlotu(int redaka, int stupaca, IEnumerable<int> duljineBrodova)
-        {
-            // za svaki slučaj sortiramo duljine od najveće prema namanjoj
             duljineBrodova = duljineBrodova.OrderByDescending(d => d);
-            int brojPokušaja = 5;
+            const int brojPokušaja = 100;
             for (int i = 0; i < brojPokušaja; ++i)
             {
-                try
-                {
-                    Mreža m = new Mreža(redaka, stupaca);
-                    return SložiBrodove(m, duljineBrodova);
-                }
-                catch (ApplicationException)
-                {
-                }
+                Mreža mreža = new Mreža(redaka, stupaca);
+                Flota flota = SložiBrodove(mreža, duljineBrodova);
+                if (flota != null)
+                    return flota;
             }
-            var poruka = string.Format("Nije uspio složiti flotu ni nakon {0} pokušaja", brojPokušaja);
+            var poruka = string.Format("Nije uspio složiti flotu ni nakon " +
+                                       "{0} pokušaja", brojPokušaja);
             throw new ApplicationException(poruka);
         }
 
-        private Flota SložiBrodove(Mreža mreža, IEnumerable<int> duljineBrodova)
+        private Flota SložiBrodove(Mreža mreža,
+                                   IEnumerable<int> duljineBrodova)
         {
-            Flota f = new Flota();
-            var tražilica = new TražilicaNizovaPolja(mreža);
+            Flota flota = new Flota();
+            TražilicaNizovaPolja tražilica = new TražilicaNizovaPolja();
+            ČistačPolja čistač = new ČistačPolja();
             foreach (int duljina in duljineBrodova)
             {
-                var kandidati = tražilica.DajNizovePolja(duljina);
+                var polja = mreža.RaspoloživaPolja;
+                // raspoloživih polja manje nego duljina – ništa od flote!
+                if (polja.Count() < duljina)
+                    return null;
+                var kandidati = tražilica.DajNizovePolja(polja, duljina);
+                // nema više nizova polja – ništa od flote!
                 if (kandidati.Count() == 0)
-                    throw new ApplicationException();
-                var izbor = izbornik.Izaberi(kandidati);
-                f.DodajBrod(izbor);
+                    return null;
+                var izbor = Izaberi(kandidati);
+                flota.DodajBrod(izbor);
                 čistač.Ukloni(mreža, izbor);
             }
-            return f;
+            return flota;
         }
 
-        private NasumičniIzbornikPolja izbornik;
-        private ČistačPolja čistač;
+        private IEnumerable<Polje> Izaberi(NizoviPolja kandidati)
+        {
+            int indeks = slučajni.Next(kandidati.Count());
+            return kandidati.ElementAt(indeks);
+        }
+
+        private Random slučajni = new Random();
     }
 }

@@ -13,30 +13,25 @@ namespace PotapanjeBrodova
 
     public class TražilicaNizovaPolja
     {
-        public TražilicaNizovaPolja(Mreža mreža)
+        public NizoviPolja DajNizovePolja(IEnumerable<Polje> raspoloživa,
+                                          int duljina)
         {
-            this.mreža = mreža;
+            return DajNizove(raspoloživa, duljina, PoljaDesno, DovoljnoOdmaknutoOdNajdesnijeg)
+                .Concat(DajNizove(raspoloživa, duljina, PoljaDolje, DovoljnoOdmaknutoOdNajdonjeg));
         }
 
-        public NizoviPolja DajNizovePolja(int duljina)
+        private NizoviPolja DajNizove(IEnumerable<Polje> raspoloživa, int duljina, PopisPolja traženaPolja, DovoljanOdmak dovoljnoOdmaknuto)
         {
-            return DajNizove(duljina, PoljaDesno, DovoljnoOdmaknutoOdNajdesnijeg)
-                .Concat(DajNizove(duljina, PoljaDolje, DovoljnoOdmaknutoOdNajdonjeg));
-        }
-
-        private NizoviPolja DajNizove(int duljina, PopisPolja traženaPolja, DovoljanOdmak dovoljnoOdmaknuto)
-        {
-            int najdesnijiStupac = mreža.RaspoloživaPolja.Max(p => p.Stupac);
-            int najdonjiRedak = mreža.RaspoloživaPolja.Max(p => p.Redak);
+            int najdesnijiStupac = raspoloživa.Max(p => p.Stupac);
+            int najdonjiRedak = raspoloživa.Max(p => p.Redak);
             Polje granica = new Polje(najdonjiRedak - duljina + 1, najdesnijiStupac - duljina + 1);
             ListePolja liste = new ListePolja();
-            foreach (Polje početno in mreža.RaspoloživaPolja)
+            foreach (Polje početno in raspoloživa)
             {
                 // dodatni uvjet kojim izbjegavamo jalova pretraživanja:
                 if (dovoljnoOdmaknuto(početno, granica))
                 {
                     List<Polje> polja = new List<Polje> { početno };
-                    var raspoloživa = mreža.RaspoloživaPolja;
                     polja.AddRange(raspoloživa.Intersect(traženaPolja(početno, duljina)));
                     if (polja.Count() == duljina)
                         liste.Add(polja);
@@ -53,7 +48,7 @@ namespace PotapanjeBrodova
                 polja.Add(new Polje(polje.Redak, s));
             return polja;
         }
-
+        // ... i ispod
         private IEnumerable<Polje> PoljaDolje(Polje polje, int duljina)
         {
             List<Polje> polja = new List<Polje>();
@@ -72,7 +67,5 @@ namespace PotapanjeBrodova
         {
             return polje.Redak <= granica.Redak;
         }
-
-        private Mreža mreža;
     }
 }
