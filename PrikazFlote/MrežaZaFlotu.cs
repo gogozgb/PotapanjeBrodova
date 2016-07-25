@@ -67,7 +67,7 @@ namespace PrikazFlote
             int y = 0;
             for (int r = 0; r <= redaka; ++r)
             {
-                pe.Graphics.DrawLine(peroLinija, x1, y, x2, y);
+                pe.Graphics.DrawLine(crtaMreže, x1, y, x2, y);
                 y += VisinaPolja;
             }
         }
@@ -79,7 +79,7 @@ namespace PrikazFlote
             int y2 = VisinaPolja * redaka;
             for (int s = 0; s <= stupaca; ++s)
             {
-                pe.Graphics.DrawLine(peroLinija, x, y1, x, y2);
+                pe.Graphics.DrawLine(crtaMreže, x, y1, x, y2);
                 x += ŠirinaPolja;
             }
         }
@@ -100,14 +100,14 @@ namespace PrikazFlote
             int x = redak * ŠirinaPolja;
             int y = stupac * VisinaPolja;
             pe.Graphics.FillRectangle(bojaBroda, x, y, ŠirinaPolja, VisinaPolja);
-            pe.Graphics.DrawRectangle(peroLinija, x, y, ŠirinaPolja, VisinaPolja);
+            pe.Graphics.DrawRectangle(crtaMreže, x, y, ŠirinaPolja, VisinaPolja);
         }
 
         private int redaka = 10;
         private int stupaca = 10;
         private Flota flota;
 
-        private Pen peroLinija = new Pen(SystemColors.ActiveBorder);
+        private Pen crtaMreže = new Pen(SystemColors.ActiveBorder);
         private Brush bojaBroda = new SolidBrush(Color.Navy);
     }
 }
