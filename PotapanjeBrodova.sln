@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PotapanjeBrodova", "Potapan
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestPotapanjaBrodova", "TestPotapanjaBrodova\TestPotapanjaBrodova.csproj", "{15983509-83A7-43C7-A9ED-FF9734D1B233}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KonzolniTestBrodograditelja", "KonzolniTestBrodograditelja\KonzolniTestBrodograditelja.csproj", "{E6AE5F2D-08FC-48B8-9F13-44AF15B5EF8C}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{15983509-83A7-43C7-A9ED-FF9734D1B233}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15983509-83A7-43C7-A9ED-FF9734D1B233}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15983509-83A7-43C7-A9ED-FF9734D1B233}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E6AE5F2D-08FC-48B8-9F13-44AF15B5EF8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E6AE5F2D-08FC-48B8-9F13-44AF15B5EF8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E6AE5F2D-08FC-48B8-9F13-44AF15B5EF8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E6AE5F2D-08FC-48B8-9F13-44AF15B5EF8C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
