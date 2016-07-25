@@ -46,12 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="CustomControl.Designer.cs">
-      <DependentUpon>CustomControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="FormFlota.cs">
       <SubType>Form</SubType>
     </Compile>
