@@ -30,21 +30,21 @@ namespace PotapanjeBrodova
                                    IEnumerable<int> duljineBrodova)
         {
             Flota flota = new Flota();
-            TražilicaNizovaPolja tražilica = new TražilicaNizovaPolja();
-            ČistačPolja čistač = new ČistačPolja();
+            TražilicaNizovaPolja tražilica = new TražilicaNizovaPolja(mreža);
+            ČistačPolja čistač = new ČistačPolja(mreža);
             foreach (int duljina in duljineBrodova)
             {
                 var polja = mreža.RaspoloživaPolja;
                 // raspoloživih polja manje nego duljina – ništa od flote!
                 if (polja.Count() < duljina)
                     return null;
-                var kandidati = tražilica.DajNizovePolja(polja, duljina);
+                var kandidati = tražilica.DajNizovePolja(duljina);
                 // nema više nizova polja – ništa od flote!
                 if (kandidati.Count() == 0)
                     return null;
                 var izbor = Izaberi(kandidati);
                 flota.DodajBrod(izbor);
-                čistač.Ukloni(mreža, izbor);
+                čistač.Ukloni(izbor);
             }
             return flota;
         }

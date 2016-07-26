@@ -7,7 +7,12 @@ namespace PotapanjeBrodova
 {
     public class ČistačPolja
     {
-        public void Ukloni(Mreža mreža, IEnumerable<Polje> brodskaPolja)
+        public ČistačPolja(Mreža mreža)
+        {
+            this.mreža = mreža;
+        }
+
+        public void Ukloni(IEnumerable<Polje> brodskaPolja)
         {
             brodskaPolja = brodskaPolja.Sortiraj();
             Polje prvo = brodskaPolja.First();
@@ -22,5 +27,7 @@ namespace PotapanjeBrodova
                     mreža.UkloniPolje(r, s);
             }
         }
+
+        Mreža mreža;
     }
 }

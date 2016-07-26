@@ -13,10 +13,10 @@ namespace PotapanjeBrodova
 
     public class TražilicaNizovaPolja
     {
-        public TražilicaNizovaPolja(Mreža mreža)
-        {
-            this.mreža = mreža;
-        }
+    public TražilicaNizovaPolja(Mreža mreža)
+    {
+        this.mreža = mreža;
+    }
 
         public NizoviPolja DajNizovePolja(int duljina)
         {
