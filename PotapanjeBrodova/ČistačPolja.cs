@@ -28,6 +28,6 @@ namespace PotapanjeBrodova
             }
         }
 
-        Mreža mreža;
+        private Mreža mreža;
     }
 }
