@@ -1,20 +1,32 @@
 ﻿// "Flota.cs" u projektu "PotapanjeBrodova"
+using System;
 using System.Collections.Generic;
 
 namespace PotapanjeBrodova
 {
-    public class Flota
-{
-    public void DodajBrod(IEnumerable<Polje> polja)
+    public class Flota : IGađani
     {
-        brodovi.Add(new Brod(polja));
-    }
+        public void DodajBrod(IEnumerable<Polje> polja)
+        {
+            brodovi.Add(new Brod(polja));
+        }
 
-    public IEnumerable<Brod> Brodovi
-    {
-        get { return brodovi; }
-    }
+        public RezultatGađanja Gađaj(Polje p)
+        {
+            foreach (Brod brod in brodovi)
+            {
+                RezultatGađanja rez = brod.Gađaj(p);
+                if (rez != RezultatGađanja.Promašaj)
+                    return rez;
+            }
+            return RezultatGađanja.Promašaj;
+        }
 
-    private List<Brod> brodovi = new List<Brod>();
-}
+        public IEnumerable<Brod> Brodovi
+        {
+            get { return brodovi; }
+        }
+
+        private List<Brod> brodovi = new List<Brod>();
+    }
 }

@@ -66,5 +66,31 @@ namespace TestPotapanjaBrodova
             Assert.AreEqual(RezultatGađanja.Potonuće, b.Gađaj(new Polje(1, 3)));
         }
 
+        [TestMethod]
+        public void Brod_Gađaj_VraćaPogodakZaIstoPoljeBroda()
+        {
+            List<Polje> poljaZaBrod = new List<Polje>
+            {
+                new Polje(1, 2),
+                new Polje(1, 3)
+            };
+            Brod b = new Brod(poljaZaBrod);
+            Assert.AreEqual(RezultatGađanja.Pogodak, b.Gađaj(new Polje(1, 2)));
+            Assert.AreEqual(RezultatGađanja.Pogodak, b.Gađaj(new Polje(1, 2)));
+        }
+
+        [TestMethod]
+        public void Brod_Gađaj_VraćaPotonućeZaIstoZadnjePoljeBroda()
+        {
+            List<Polje> poljaZaBrod = new List<Polje>
+            {
+                new Polje(1, 2),
+                new Polje(1, 3)
+            };
+            Brod b = new Brod(poljaZaBrod);
+            Assert.AreEqual(RezultatGađanja.Pogodak, b.Gađaj(new Polje(1, 2)));
+            Assert.AreEqual(RezultatGađanja.Potonuće, b.Gađaj(new Polje(1, 3)));
+            Assert.AreEqual(RezultatGađanja.Potonuće, b.Gađaj(new Polje(1, 3)));
+        }
     }
 }
