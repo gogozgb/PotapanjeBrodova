@@ -1,4 +1,5 @@
-﻿namespace PotapanjeBrodova
+﻿// "IGađani.cs" u projektu "PotapanjeBrodova"
+namespace PotapanjeBrodova
 {
     public enum RezultatGađanja
     {
