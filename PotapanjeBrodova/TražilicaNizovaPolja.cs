@@ -13,10 +13,10 @@ namespace PotapanjeBrodova
 
     public class TražilicaNizovaPolja
     {
-    public TražilicaNizovaPolja(Mreža mreža)
-    {
-        this.mreža = mreža;
-    }
+        public TražilicaNizovaPolja(Mreža mreža)
+        {
+            this.mreža = mreža;
+        }
 
         public NizoviPolja DajNizovePolja(int duljina)
         {
@@ -36,8 +36,7 @@ namespace PotapanjeBrodova
                 if (dovoljnoOdmaknuto(početno, granica))
                 {
                     List<Polje> polja = new List<Polje> { početno };
-                    var raspoloživa = mreža.RaspoloživaPolja;
-                    polja.AddRange(raspoloživa.Intersect(traženaPolja(početno, duljina)));
+                    polja.AddRange(mreža.RaspoloživaPolja.Intersect(traženaPolja(početno, duljina)));
                     if (polja.Count() == duljina)
                         liste.Add(polja);
                 }
