@@ -8,8 +8,9 @@ namespace PotapanjeBrodova
     // skraćeni sinonimi
     using NizoviPolja = IEnumerable<IEnumerable<Polje>>;
     using ListePolja = List<IEnumerable<Polje>>;
-    using PopisPolja = Func<Polje, int, IEnumerable<Polje>>;
+    using PoljaUNizu = Func<Polje, int, IEnumerable<Polje>>;
     using DovoljanOdmak = Func<Polje, Polje, bool>;
+    using System.Diagnostics;
 
     public class TražilicaNizovaPolja
     {
@@ -24,7 +25,7 @@ namespace PotapanjeBrodova
                 .Concat(DajNizove(duljina, PoljaDolje, DovoljnoOdmaknutoOdNajdonjeg));
         }
 
-        private NizoviPolja DajNizove(int duljina, PopisPolja traženaPolja, DovoljanOdmak dovoljnoOdmaknuto)
+        private NizoviPolja DajNizove(int duljina, PoljaUNizu poljaUNizu, DovoljanOdmak dovoljnoOdmaknuto)
         {
             int najdesnijiStupac = mreža.RaspoloživaPolja.Max(p => p.Stupac);
             int najdonjiRedak = mreža.RaspoloživaPolja.Max(p => p.Redak);
@@ -35,8 +36,8 @@ namespace PotapanjeBrodova
                 // dodatni uvjet kojim izbjegavamo jalova pretraživanja:
                 if (dovoljnoOdmaknuto(početno, granica))
                 {
-                    List<Polje> polja = new List<Polje> { početno };
-                    polja.AddRange(mreža.RaspoloživaPolja.Intersect(traženaPolja(početno, duljina)));
+                    IEnumerable<Polje> polja = poljaUNizu(početno, duljina);
+                    Debug.Assert(polja.Count() <= duljina);
                     if (polja.Count() == duljina)
                         liste.Add(polja);
                 }
@@ -46,19 +47,27 @@ namespace PotapanjeBrodova
 
         private IEnumerable<Polje> PoljaDesno(Polje polje, int duljina)
         {
-            List<Polje> polja = new List<Polje>();
-            int krajnjiStupac = polje.Stupac + duljina;
-            for (int s = polje.Stupac + 1; s < krajnjiStupac; ++s)
-                polja.Add(new Polje(polje.Redak, s));
+            List<Polje> polja = new List<Polje> { polje };
+            while (--duljina > 0)
+            {
+                polje = mreža.RaspoloživaPolja.FirstOrDefault(p => p.Redak == polje.Redak && p.Stupac == polje.Stupac + 1);
+                if (polje == null)
+                    break;
+                polja.Add(polje);
+            }
             return polja;
         }
 
         private IEnumerable<Polje> PoljaDolje(Polje polje, int duljina)
         {
-            List<Polje> polja = new List<Polje>();
-            int krajnjiRedak = polje.Redak + duljina;
-            for (int r = polje.Redak + 1; r < krajnjiRedak; ++r)
-                polja.Add(new Polje(r, polje.Stupac));
+            List<Polje> polja = new List<Polje> { polje };
+            while (--duljina > 0)
+            {
+                polje = mreža.RaspoloživaPolja.FirstOrDefault(p => p.Redak == polje.Redak + 1 && p.Stupac == polje.Stupac);
+                if (polje == null)
+                    break;
+                polja.Add(polje);
+            }
             return polja;
         }
 
