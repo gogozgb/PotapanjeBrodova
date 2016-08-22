@@ -1,6 +1,7 @@
-﻿// "IzbornikPoljaZaBrod.cs" u projekzu "PotapanjeBrodova"
+﻿// "IzbornikPoljaZaBrod.cs" u projektu "PotapanjeBrodova"
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace PotapanjeBrodova
@@ -8,9 +9,8 @@ namespace PotapanjeBrodova
     // skraćeni sinonimi
     using NizoviPolja = IEnumerable<IEnumerable<Polje>>;
     using ListePolja = List<IEnumerable<Polje>>;
-    using PoljaUNizu = Func<Polje, int, IEnumerable<Polje>>;
+    using JesuLiUNizu = Func<Polje, Polje, bool>;
     using DovoljanOdmak = Func<Polje, Polje, bool>;
-    using System.Diagnostics;
 
     public class TražilicaNizovaPolja
     {
@@ -21,11 +21,11 @@ namespace PotapanjeBrodova
 
         public NizoviPolja DajNizovePolja(int duljina)
         {
-            return DajNizove(duljina, PoljaDesno, DovoljnoOdmaknutoOdNajdesnijeg)
-                .Concat(DajNizove(duljina, PoljaDolje, DovoljnoOdmaknutoOdNajdonjeg));
+            return DajNizove(duljina, JeLiDesno, DovoljnoOdmaknutoOdNajdesnijeg)
+                .Concat(DajNizove(duljina, JeLiDolje, DovoljnoOdmaknutoOdNajdonjeg));
         }
 
-        private NizoviPolja DajNizove(int duljina, PoljaUNizu poljaUNizu, DovoljanOdmak dovoljnoOdmaknuto)
+        private NizoviPolja DajNizove(int duljina, JesuLiUNizu jeLiUNizu, DovoljanOdmak dovoljnoOdmaknuto)
         {
             int najdesnijiStupac = mreža.RaspoloživaPolja.Max(p => p.Stupac);
             int najdonjiRedak = mreža.RaspoloživaPolja.Max(p => p.Redak);
@@ -36,21 +36,21 @@ namespace PotapanjeBrodova
                 // dodatni uvjet kojim izbjegavamo jalova pretraživanja:
                 if (dovoljnoOdmaknuto(početno, granica))
                 {
-                    IEnumerable<Polje> polja = poljaUNizu(početno, duljina);
-                    Debug.Assert(polja.Count() <= duljina);
-                    if (polja.Count() == duljina)
-                        liste.Add(polja);
+                    IEnumerable<Polje> poljaUNizu = PoljaUNizu(početno, duljina, jeLiUNizu);
+                    Debug.Assert(poljaUNizu.Count() <= duljina);
+                    if (poljaUNizu.Count() == duljina)
+                        liste.Add(poljaUNizu);
                 }
             }
             return liste;
         }
 
-        private IEnumerable<Polje> PoljaDesno(Polje polje, int duljina)
+        private IEnumerable<Polje> PoljaUNizu(Polje polje, int duljina, JesuLiUNizu jeLiUNizu)
         {
             List<Polje> polja = new List<Polje> { polje };
             while (--duljina > 0)
             {
-                polje = mreža.RaspoloživaPolja.FirstOrDefault(p => p.Redak == polje.Redak && p.Stupac == polje.Stupac + 1);
+                polje = mreža.RaspoloživaPolja.FirstOrDefault(p => jeLiUNizu(p, polje));
                 if (polje == null)
                     break;
                 polja.Add(polje);
@@ -58,17 +58,14 @@ namespace PotapanjeBrodova
             return polja;
         }
 
-        private IEnumerable<Polje> PoljaDolje(Polje polje, int duljina)
+        bool JeLiDesno(Polje polje, Polje prethodno)
         {
-            List<Polje> polja = new List<Polje> { polje };
-            while (--duljina > 0)
-            {
-                polje = mreža.RaspoloživaPolja.FirstOrDefault(p => p.Redak == polje.Redak + 1 && p.Stupac == polje.Stupac);
-                if (polje == null)
-                    break;
-                polja.Add(polje);
-            }
-            return polja;
+            return polje.Redak == prethodno.Redak && polje.Stupac == prethodno.Stupac + 1;
+        }
+
+        bool JeLiDolje(Polje polje, Polje prethodno)
+        {
+            return polje.Redak == prethodno.Redak + 1 && polje.Stupac == prethodno.Stupac;
         }
 
         private bool DovoljnoOdmaknutoOdNajdesnijeg(Polje polje, Polje granica)
