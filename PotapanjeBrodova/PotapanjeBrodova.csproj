@@ -44,6 +44,7 @@
     <Compile Include="Brodograditelj.cs" />
     <Compile Include="IGađani.cs" />
     <Compile Include="IPucač.cs" />
+    <Compile Include="Napipač.cs" />
     <Compile Include="NasumičniIzbornikPolja.cs" />
     <Compile Include="TražilicaNizovaPolja.cs" />
     <Compile Include="Proširenja.cs" />
