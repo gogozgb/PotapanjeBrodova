@@ -19,6 +19,7 @@ namespace PotapanjeBrodova
             var kandidati = DajKandidate();
             int izbor = slučajni.Next(kandidati.Count());
             zadnjeGađano = kandidati.ElementAt(izbor);
+            mreža.UkloniPolje(zadnjeGađano.Redak, zadnjeGađano.Stupac);
             return zadnjeGađano;
         }
 
@@ -31,7 +32,6 @@ namespace PotapanjeBrodova
             {
                 pogođenaPolja.Add(zadnjeGađano);
             }
-            mreža.UkloniPolje(zadnjeGađano.Redak, zadnjeGađano.Stupac);
         }
 
         public IEnumerable<Polje> PogođenaPolja
