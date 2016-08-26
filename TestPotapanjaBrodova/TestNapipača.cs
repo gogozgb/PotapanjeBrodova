@@ -9,24 +9,17 @@ namespace TestPotapanjaBrodova
     public class TestNapipača
     {
         [TestMethod]
-        public void Napipač_UputiPucanj_VraćaPoljeKojeMožePripadatiNajvećemBrojuBrodovaDuljine3()
+        public void Napipač_DajKandidate_VraćaSvaPoljaKojaMoguPripadatiBrodovimaDuljine3()
         {
             Mreža mreža = new Mreža(1, 5);
             int duljinaBroda = 3;
             Napipač napipač = new Napipač(mreža, duljinaBroda);
-            Polje gađanoPolje = napipač.UputiPucanj();
-            Assert.AreEqual(new Polje(0, 2), gađanoPolje);
-        }
-
-        [TestMethod]
-        public void Napipač_DajKandidate_VraćaPoljaKojaMoguPripadatiNajvećemBrojuBrodovaDuljine5()
-        {
-            Mreža mreža = new Mreža(1, 7);
-            int duljinaBroda = 5;
-            Napipač napipač = new Napipač(mreža, duljinaBroda);
             var kandidati = napipač.DajKandidate();
-            Polje[] moguća = new Polje[] { new Polje(0, 2), new Polje(0, 3), new Polje(0, 4) };
-            Assert.AreEqual(moguća.Count(), moguća.Intersect(kandidati).Count());
+            // broj kandidata 3 broda po 3 polja:
+            Assert.AreEqual(9, kandidati.Count());
+            Polje[] moguća = new Polje[] { new Polje(0, 0), new Polje(0, 1), new Polje(0, 2), new Polje(0, 3), new Polje(0, 4) };
+            // preko presjeka provjeravamo sadrži li lista kandidata sva moguća polja:
+            Assert.IsTrue(moguća.Except(kandidati).Count() == 0 && kandidati.Except(moguća).Count() == 0);
         }
 
         [TestMethod]

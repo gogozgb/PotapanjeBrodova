@@ -44,18 +44,10 @@ namespace PotapanjeBrodova
             }
         }
 
-        public IEnumerable<Polje> DajKandidate()
+        public virtual IEnumerable<Polje> DajKandidate()
         {
             // sve nizove polja pretvara u jedinstvenu listu
-            var svaPolja = tražilica.DajNizovePolja(duljinaBroda)
-                .SelectMany(polje => polje);
-            // listu sortira u grupe po učestalosti pojave polja
-            var sortiraneGrupe = svaPolja.GroupBy(polje => polje)
-                .OrderByDescending(grupa => grupa.Count());
-            // vraća samo polja koja se pojavljuju najčešće
-            return sortiraneGrupe
-                .TakeWhile(grupa => grupa.Count() == sortiraneGrupe.First().Count())
-                .Select(grupa => grupa.Key);
+            return tražilica.DajNizovePolja(duljinaBroda).SelectMany(polje => polje);
         }
 
         private readonly Mreža mreža;
