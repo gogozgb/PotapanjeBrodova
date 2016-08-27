@@ -16,6 +16,8 @@ namespace PotapanjeBrodova
 
         public Polje UputiPucanj()
         {
+            // Metoda se samo poziva dok nema pogođenog polja:
+            Debug.Assert(pogođenaPolja.Count == 0);
             // za svaki slučaj: zadnjeGađano mora biti null
             Debug.Assert(zadnjeGađano == null);
 
@@ -28,9 +30,6 @@ namespace PotapanjeBrodova
 
         public void EvidentirajRezultat(RezultatGađanja rezultat)
         {
-            // Napipač smije evidentirati samo jedno polje:
-            Debug.Assert(pogođenaPolja.Count == 0);
-
             if (rezultat != RezultatGađanja.Promašaj)
                 pogođenaPolja.Add(zadnjeGađano);
             zadnjeGađano = null;
