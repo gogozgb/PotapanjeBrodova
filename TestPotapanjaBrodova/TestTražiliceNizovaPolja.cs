@@ -1,4 +1,4 @@
-﻿// "TestTražilice
+﻿// "TestTražiliceNizovaPolja.cs" u projektu "TestPotapanjaBrodova"
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PotapanjeBrodova;
 using System.Collections.Generic;
@@ -62,5 +62,81 @@ namespace TestPotapanjaBrodova
             NizoviPolja nizovi = tražilica.DajNizovePolja(duljina);
             Assert.AreEqual(0, nizovi.Count());
         }
+
+        [TestMethod]
+        public void TražilicaNizovaPolja_VraćaMaximalno5PoljaIznadPoljaRedak5Stupac5()
+        {
+            Mreža m = new Mreža(10, 10);
+            TražilicaNizovaPolja tražilica = new TražilicaNizovaPolja(m);
+            var poljaIznad = tražilica.DajPoljaDo(new Polje(5, 5), 10, Smjer.Gore);
+            Assert.AreEqual(5, poljaIznad.Count());
+            Assert.IsTrue(poljaIznad.Contains(new Polje(4, 5)));
+            Assert.IsTrue(poljaIznad.Contains(new Polje(3, 5)));
+            Assert.IsTrue(poljaIznad.Contains(new Polje(2, 5)));
+            Assert.IsTrue(poljaIznad.Contains(new Polje(1, 5)));
+            Assert.IsTrue(poljaIznad.Contains(new Polje(0, 5)));
+        }
+
+        [TestMethod]
+        public void TražilicaNizovaPolja_Vraća3PoljaIznadPoljaRedak5Stupac5()
+        {
+            Mreža m = new Mreža(10, 10);
+            TražilicaNizovaPolja tražilica = new TražilicaNizovaPolja(m);
+            var poljaIznad = tražilica.DajPoljaDo(new Polje(5, 5), 3, Smjer.Gore);
+            Assert.AreEqual(3, poljaIznad.Count());
+            Assert.IsTrue(poljaIznad.Contains(new Polje(4, 5)));
+            Assert.IsTrue(poljaIznad.Contains(new Polje(3, 5)));
+            Assert.IsTrue(poljaIznad.Contains(new Polje(2, 5)));
+        }
+
+        [TestMethod]
+        public void TražilicaPoljaUNastavku_UVraćenomNizuPoljaIznadPoljaRedak5Stupac5PrvoPoljeJeURetku4()
+        {
+            Mreža m = new Mreža(10, 10);
+            TražilicaNizovaPolja tražilica = new TražilicaNizovaPolja(m);
+            var poljaIznad = tražilica.DajPoljaDo(new Polje(5, 5), 10, Smjer.Gore);
+            Assert.AreEqual(new Polje(4, 5), poljaIznad.First());
+        }
+
+        [TestMethod]
+        public void TražilicaPoljaUNastavku_Vraća4PoljaDesnoOdPoljaRedak5Stupac5()
+        {
+            Mreža m = new Mreža(10, 10);
+            TražilicaNizovaPolja tražilica = new TražilicaNizovaPolja(m);
+            var poljaDesno = tražilica.DajPoljaDo(new Polje(5, 5), 10, Smjer.Desno);
+            Assert.AreEqual(4, poljaDesno.Count());
+            Assert.IsTrue(poljaDesno.Contains(new Polje(5, 6)));
+            Assert.IsTrue(poljaDesno.Contains(new Polje(5, 9)));
+        }
+
+        [TestMethod]
+        public void TražilicaPoljaUNastavku_UVraćenomNizuPoljaDesnoOdPoljaRedak5Stupac5PrvoJePoljeUStupcu6()
+        {
+            Mreža m = new Mreža(10, 10);
+            TražilicaNizovaPolja tražilica = new TražilicaNizovaPolja(m);
+            var poljaDesno = tražilica.DajPoljaDo(new Polje(5, 5), 10, Smjer.Desno);
+            Assert.AreEqual(new Polje(5, 6), poljaDesno.First());
+        }
+
+        [TestMethod]
+        public void TražilicaPoljaUNastavku_Vraća4PoljaIspodPoljaRedak5Stupac5()
+        {
+            Mreža m = new Mreža(10, 10);
+            TražilicaNizovaPolja tražilica = new TražilicaNizovaPolja(m);
+            var poljaIspod = tražilica.DajPoljaDo(new Polje(5, 5), 10, Smjer.Dolje);
+            Assert.AreEqual(4, poljaIspod.Count());
+            Assert.IsTrue(poljaIspod.Contains(new Polje(6, 5)));
+            Assert.IsTrue(poljaIspod.Contains(new Polje(9, 5)));
+        }
+
+        [TestMethod]
+        public void TražilicaPoljaUNastavku_UVraćenomNizuPoljaIspodPoljaRedak5Stupac5PrvoJePoljeURetku6()
+        {
+            Mreža m = new Mreža(10, 10);
+            TražilicaNizovaPolja tražilica = new TražilicaNizovaPolja(m);
+            var poljaIspod = tražilica.DajPoljaDo(new Polje(5, 5), 10, Smjer.Dolje);
+            Assert.AreEqual(new Polje(6, 5), poljaIspod.First());
+        }
+
     }
 }
