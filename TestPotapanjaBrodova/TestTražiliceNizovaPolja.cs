@@ -68,7 +68,7 @@ namespace TestPotapanjaBrodova
         {
             Mreža m = new Mreža(10, 10);
             TražilicaNizovaPolja tražilica = new TražilicaNizovaPolja(m);
-            var poljaIznad = tražilica.DajPoljaDo(new Polje(5, 5), 10, Smjer.Gore);
+            var poljaIznad = tražilica.DajPoljaDo(new Polje(5, 5), 5, Smjer.Gore);
             Assert.AreEqual(5, poljaIznad.Count());
             Assert.IsTrue(poljaIznad.Contains(new Polje(4, 5)));
             Assert.IsTrue(poljaIznad.Contains(new Polje(3, 5)));
@@ -94,7 +94,7 @@ namespace TestPotapanjaBrodova
         {
             Mreža m = new Mreža(10, 10);
             TražilicaNizovaPolja tražilica = new TražilicaNizovaPolja(m);
-            var poljaIznad = tražilica.DajPoljaDo(new Polje(5, 5), 10, Smjer.Gore);
+            var poljaIznad = tražilica.DajPoljaDo(new Polje(5, 5), 5, Smjer.Gore);
             Assert.AreEqual(new Polje(4, 5), poljaIznad.First());
         }
 
@@ -103,7 +103,7 @@ namespace TestPotapanjaBrodova
         {
             Mreža m = new Mreža(10, 10);
             TražilicaNizovaPolja tražilica = new TražilicaNizovaPolja(m);
-            var poljaDesno = tražilica.DajPoljaDo(new Polje(5, 5), 10, Smjer.Desno);
+            var poljaDesno = tražilica.DajPoljaDo(new Polje(5, 5), 4, Smjer.Desno);
             Assert.AreEqual(4, poljaDesno.Count());
             Assert.IsTrue(poljaDesno.Contains(new Polje(5, 6)));
             Assert.IsTrue(poljaDesno.Contains(new Polje(5, 9)));
@@ -114,7 +114,7 @@ namespace TestPotapanjaBrodova
         {
             Mreža m = new Mreža(10, 10);
             TražilicaNizovaPolja tražilica = new TražilicaNizovaPolja(m);
-            var poljaDesno = tražilica.DajPoljaDo(new Polje(5, 5), 10, Smjer.Desno);
+            var poljaDesno = tražilica.DajPoljaDo(new Polje(5, 5), 4, Smjer.Desno);
             Assert.AreEqual(new Polje(5, 6), poljaDesno.First());
         }
 
@@ -123,7 +123,7 @@ namespace TestPotapanjaBrodova
         {
             Mreža m = new Mreža(10, 10);
             TražilicaNizovaPolja tražilica = new TražilicaNizovaPolja(m);
-            var poljaIspod = tražilica.DajPoljaDo(new Polje(5, 5), 10, Smjer.Dolje);
+            var poljaIspod = tražilica.DajPoljaDo(new Polje(5, 5), 4, Smjer.Dolje);
             Assert.AreEqual(4, poljaIspod.Count());
             Assert.IsTrue(poljaIspod.Contains(new Polje(6, 5)));
             Assert.IsTrue(poljaIspod.Contains(new Polje(9, 5)));
@@ -134,7 +134,7 @@ namespace TestPotapanjaBrodova
         {
             Mreža m = new Mreža(10, 10);
             TražilicaNizovaPolja tražilica = new TražilicaNizovaPolja(m);
-            var poljaIspod = tražilica.DajPoljaDo(new Polje(5, 5), 10, Smjer.Dolje);
+            var poljaIspod = tražilica.DajPoljaDo(new Polje(5, 5), 4, Smjer.Dolje);
             Assert.AreEqual(new Polje(6, 5), poljaIspod.First());
         }
 

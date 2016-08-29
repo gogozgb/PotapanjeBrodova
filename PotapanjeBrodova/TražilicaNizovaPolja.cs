@@ -33,20 +33,20 @@ namespace PotapanjeBrodova
                 .Concat(DajNizove(duljina, JeLiDolje, DovoljnoOdmaknutoOdNajdonjeg));
         }
 
-        public IEnumerable<Polje> DajPoljaDo(Polje polje, int brojPolja, Smjer smjer)
+        public IEnumerable<Polje> DajPoljaDo(Polje polje, int najvišePolja, Smjer smjer)
         {
             switch (smjer)
             {
                 case Smjer.Gore:
-                    return PoljaUNastavku(polje, brojPolja, JeLiIznad);
+                    return PoljaUNastavku(polje, najvišePolja, JeLiIznad);
                 case Smjer.Desno:
-                    return PoljaUNastavku(polje, brojPolja, JeLiDesno);
+                    return PoljaUNastavku(polje, najvišePolja, JeLiDesno);
                 case Smjer.Dolje:
-                    return PoljaUNastavku(polje, brojPolja, JeLiDolje);
+                    return PoljaUNastavku(polje, najvišePolja, JeLiDolje);
                 case Smjer.Lijevo:
-                    return PoljaUNastavku(polje, brojPolja, JeLiLijevo);
+                    return PoljaUNastavku(polje, najvišePolja, JeLiLijevo);
             }
-            throw new NotImplementedException("Nepodržani smjer.");
+            throw new ArgumentOutOfRangeException("Nepodržani smjer.");
         }
 
         private NizoviPolja DajNizove(int duljina, JesuLiUNizu jeLiUNizu, DovoljanOdmak dovoljnoOdmaknuto)
@@ -62,7 +62,6 @@ namespace PotapanjeBrodova
                 {
                     List<Polje> poljaUNizu = new List<Polje> { početno };
                     poljaUNizu.AddRange(PoljaUNastavku(početno, duljina - 1, jeLiUNizu));
-                    Debug.Assert(poljaUNizu.Count() <= duljina);
                     if (poljaUNizu.Count() == duljina)
                         liste.Add(poljaUNizu);
                 }
@@ -70,10 +69,10 @@ namespace PotapanjeBrodova
             return liste;
         }
 
-        private IEnumerable<Polje> PoljaUNastavku(Polje polje, int brojPolja, JesuLiUNizu jeLiUNizu)
+        private List<Polje> PoljaUNastavku(Polje polje, int najvišePolja, JesuLiUNizu jeLiUNizu)
         {
             List<Polje> polja = new List<Polje>();
-            while (brojPolja-- > 0)
+            while (najvišePolja-- > 0)
             {
                 polje = mreža.RaspoloživaPolja.FirstOrDefault(p => jeLiUNizu(p, polje));
                 if (polje == null)
