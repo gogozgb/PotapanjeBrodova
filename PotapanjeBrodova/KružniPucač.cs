@@ -53,10 +53,9 @@ namespace PotapanjeBrodova
                     nizoviPolja.Add(nizPolja);
             }
             // sortira po duljinama nizova
-            var sortiraneGrupe = nizoviPolja.GroupBy(niz => niz).OrderByDescending(grupa => grupa.Count());
-            // filtrira samo nizove koji su najveće duljine
-            var filtriraniNizovi = sortiraneGrupe.TakeWhile(grupa => grupa.Count() == sortiraneGrupe.First().Count()).Select(grupa => grupa.Key);
-            return filtriraniNizovi.Select(niz => niz.First());
+            var sortiraneGrupe = nizoviPolja.GroupBy(niz => niz).OrderByDescending(niz => niz.Count());
+            // filtrira samo nizove koji su najveće duljine i vraća prve članove
+            return sortiraneGrupe.TakeWhile(grupa => grupa.Key.Count() == sortiraneGrupe.First().Key.Count()).Select(grupa => grupa.Key.First());
         }
 
         private readonly Mreža mreža;
