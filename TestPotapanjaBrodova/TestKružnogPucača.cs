@@ -15,6 +15,7 @@ namespace TestPotapanjaBrodova
             Polje pogođenoPolje = new Polje(2, 2);
             KružniPucač pucač = new KružniPucač(mreža, 3, pogođenoPolje);
             IEnumerable<Polje> kandidati = pucač.DajKandidate();
+            a
             Assert.AreEqual(4, kandidati.Count());
             Assert.IsTrue(kandidati.Contains(new Polje(1, 2)));
             Assert.IsTrue(kandidati.Contains(new Polje(2, 3)));
