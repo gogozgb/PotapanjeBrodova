@@ -1,16 +1,15 @@
 ﻿// "IzbornikPoljaZaBrod.cs" u projektu "PotapanjeBrodova"
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 
 namespace PotapanjeBrodova
 {
+    using DovoljanOdmak = Func<Polje, Polje, bool>;
+    using JesuLiUNizu = Func<Polje, Polje, bool>;
+    using ListePolja = List<IEnumerable<Polje>>;
     // skraćeni sinonimi
     using NizoviPolja = IEnumerable<IEnumerable<Polje>>;
-    using ListePolja = List<IEnumerable<Polje>>;
-    using JesuLiUNizu = Func<Polje, Polje, bool>;
-    using DovoljanOdmak = Func<Polje, Polje, bool>;
 
     public enum Smjer
     {
