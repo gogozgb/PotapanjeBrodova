@@ -17,7 +17,7 @@ namespace TestPotapanjaBrodova
             var kandidati = napipač.DajKandidate();
             // broj kandidata 3 broda po 3 polja:
             Assert.AreEqual(9, kandidati.Count());
-            Polje[] moguća = new Polje[] { new Polje(0, 0), new Polje(0, 1), new Polje(0, 2), new Polje(0, 3), new Polje(0, 4) };
+            Polje[] moguća = new Polje[] { new Polje(0, 0), new Polje(1, 0), new Polje(2, 0), new Polje(3, 0), new Polje(4, 0) };
             // preko presjeka provjeravamo sadrži li lista kandidata sva moguća polja:
             Assert.IsTrue(moguća.Except(kandidati).Count() == 0 && kandidati.Except(moguća).Count() == 0);
         }

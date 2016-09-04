@@ -15,8 +15,8 @@ namespace TestPotapanjaBrodova
         {
             List<Polje> polja = new List<Polje>
             {
-                new Polje(4, 3),
-                new Polje(5, 3),
+                new Polje(3, 4),
+                new Polje(3, 5),
                 new Polje(3, 3)
             };
             IEnumerable<Polje> sortirana = polja.Sortiraj();
@@ -29,8 +29,8 @@ namespace TestPotapanjaBrodova
         {
             List<Polje> polja = new List<Polje>
             {
-                new Polje(3, 4),
-                new Polje(3, 5),
+                new Polje(4, 3),
+                new Polje(5, 3),
                 new Polje(3, 3)
             };
             IEnumerable<Polje> sortirana = polja.Sortiraj();
@@ -43,7 +43,7 @@ namespace TestPotapanjaBrodova
         {
             List<Polje> polja = new List<Polje>
             {
-                new Polje(4, 3)
+                new Polje(3, 4)
             };
             IEnumerable<Polje> sortirana = polja.Sortiraj();
             Assert.AreEqual(4, sortirana.First().Redak);
@@ -55,8 +55,8 @@ namespace TestPotapanjaBrodova
         {
             List<Polje> polja = new List<Polje>
             {
-                new Polje(4, 3),
-                new Polje(5, 4),
+                new Polje(3, 4),
+                new Polje(4, 5),
                 new Polje(3, 3)
             };
             try

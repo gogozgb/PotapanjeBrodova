@@ -53,7 +53,7 @@ namespace PotapanjeBrodova
         {
             int najdesnijiStupac = mreža.RaspoloživaPolja.Max(p => p.Stupac);
             int najdonjiRedak = mreža.RaspoloživaPolja.Max(p => p.Redak);
-            Polje granica = new Polje(najdonjiRedak - duljina + 1, najdesnijiStupac - duljina + 1);
+            Polje granica = new Polje(najdesnijiStupac - duljina + 1, najdonjiRedak - duljina + 1);
             ListePolja liste = new ListePolja();
             foreach (Polje početno in mreža.RaspoloživaPolja)
             {
@@ -96,7 +96,7 @@ namespace PotapanjeBrodova
 
         bool JeLiDolje(Polje polje, Polje prethodno)
         {
-            return polje.Redak == prethodno.Redak + 1 && polje.Stupac == prethodno.Stupac;
+            return polje.Stupac == prethodno.Stupac && polje.Redak == prethodno.Redak + 1;
         }
 
         bool JeLiLijevo(Polje polje, Polje prethodno)
@@ -106,7 +106,7 @@ namespace PotapanjeBrodova
 
         bool JeLiIznad(Polje polje, Polje prethodno)
         {
-            return polje.Redak == prethodno.Redak - 1 && polje.Stupac == prethodno.Stupac;
+            return polje.Stupac == prethodno.Stupac && polje.Redak == prethodno.Redak - 1;
         }
 
         private bool DovoljnoOdmaknutoOdNajdesnijeg(Polje polje, Polje granica)

@@ -24,7 +24,7 @@ namespace PotapanjeBrodova
             var kandidati = DajKandidate();
             int izbor = slučajni.Next(kandidati.Count());
             zadnjeGađano = kandidati.ElementAt(izbor);
-            mreža.UkloniPolje(zadnjeGađano.Redak, zadnjeGađano.Stupac);
+            mreža.UkloniPolje(zadnjeGađano);
             return zadnjeGađano;
         }
 

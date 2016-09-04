@@ -10,9 +10,9 @@ namespace TestPotapanjaBrodova
         [TestMethod]
         public void Polje_RedakIStupacJednakiSuArgumentimaKonstruktora()
         {
-            Polje p = new Polje(1, 2);
-            Assert.AreEqual(1, p.Redak);
+            Polje p = new Polje(2, 1);
             Assert.AreEqual(2, p.Stupac);
+            Assert.AreEqual(1, p.Redak);
         }
     }
 }

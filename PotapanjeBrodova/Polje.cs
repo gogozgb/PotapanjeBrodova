@@ -5,10 +5,10 @@ namespace PotapanjeBrodova
 {
     public class Polje : IEquatable<Polje>
     {
-        public Polje(int redak, int stupac)
+        public Polje(int stupac, int redak)
         {
-            Redak = redak;
             Stupac = stupac;
+            Redak = redak;
         }
 
         // tipski sigurna metoda Equals:
@@ -16,7 +16,7 @@ namespace PotapanjeBrodova
         {
             if (drugo == null)
                 return false;
-            return Redak == drugo.Redak && Stupac == drugo.Stupac;
+            return Stupac == drugo.Stupac && Redak == drugo.Redak;
         }
 
         // tipski nesigurna metoda Equals:
@@ -32,10 +32,10 @@ namespace PotapanjeBrodova
 
         public override int GetHashCode()
         {
-            return Redak << 16 ^ Stupac;
+            return Stupac << 16 ^ Redak;
         }
 
-        public readonly int Redak;
         public readonly int Stupac;
+        public readonly int Redak;
     }
 }

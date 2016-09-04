@@ -13,12 +13,12 @@ namespace PrikazFlote
             ResizeRedraw = true;
         }
 
-        public void ZadajMrežu(int redaka, int stupaca)
+        public void ZadajMrežu(int stupaca, int redaka)
         {
-            if (this.redaka == redaka && this.stupaca == stupaca)
+            if (this.stupaca == stupaca && this.redaka == redaka)
                 return;
-            this.redaka = redaka;
             this.stupaca = stupaca;
+            this.redaka = redaka;
             Invalidate();
         }
 
@@ -95,10 +95,10 @@ namespace PrikazFlote
 
         private void NacrtajPoljeBroda(PaintEventArgs pe, Polje polje)
         {
-            int redak = polje.Redak;
             int stupac = polje.Stupac;
-            int x = redak * ŠirinaPolja;
+            int redak = polje.Redak;
             int y = stupac * VisinaPolja;
+            int x = redak * ŠirinaPolja;
             pe.Graphics.FillRectangle(bojaBroda, x, y, ŠirinaPolja, VisinaPolja);
             pe.Graphics.DrawRectangle(crtaMreže, x, y, ŠirinaPolja, VisinaPolja);
         }

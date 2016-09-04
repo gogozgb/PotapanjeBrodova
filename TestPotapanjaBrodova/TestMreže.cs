@@ -17,49 +17,24 @@ namespace TestPotapanjaBrodova
             IEnumerable<Polje> polja = m.RaspoloživaPolja;
             Assert.AreEqual(25, polja.Count());
             // provjeravamo postoji li (samo jedno) polje [0, 0]
-            Assert.AreEqual(1, polja.Count(p => p.Redak == 0 && p.Stupac == 0));
+            Assert.AreEqual(1, polja.Count(p => p.Stupac == 0 && p.Redak == 0));
             // provjeravamo postoji li (samo jedno) polje [4, 4]
-            Assert.AreEqual(1, polja.Count(p => p.Redak == 4 && p.Stupac == 4));
+            Assert.AreEqual(1, polja.Count(p => p.Stupac == 4 && p.Redak == 4));
         }
 
         [TestMethod]
         public void Mreža_EliminirajPolje_UklanjaPoljeIzMreže()
         {
             Mreža m = new Mreža(5, 5);
-            m.UkloniPolje(1, 3);
+            m.UkloniPolje(3, 1);
             IEnumerable<Polje> polja = m.RaspoloživaPolja;
             Assert.AreEqual(24, polja.Count());
             // provjeravamo da polje [1, 3] ne postoji u listi raspoloživih polja
-            Assert.IsFalse(polja.Contains(new Polje(1, 3)));
+            Assert.IsFalse(polja.Contains(new Polje(3, 1)));
         }
 
         [TestMethod]
         public void Mreža_EliminirajPolje_BacaIznimkuZaRedakIzvanMreže()
-        {
-            Mreža m = new Mreža(5, 5);
-            try
-            {
-                m.UkloniPolje(5, 2);
-                Assert.Fail();
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                Assert.AreEqual(25, m.RaspoloživaPolja.Count());
-            }
-
-            try
-            {
-                m.UkloniPolje(-1, 2);
-                Assert.Fail();
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                Assert.AreEqual(25, m.RaspoloživaPolja.Count());
-            }
-        }
-
-        [TestMethod]
-        public void Mreža_EliminirajPolje_BacaIznimkuZaStupacIzvanMreže()
         {
             Mreža m = new Mreža(5, 5);
             try
@@ -84,14 +59,39 @@ namespace TestPotapanjaBrodova
         }
 
         [TestMethod]
+        public void Mreža_EliminirajPolje_BacaIznimkuZaStupacIzvanMreže()
+        {
+            Mreža m = new Mreža(5, 5);
+            try
+            {
+                m.UkloniPolje(5, 2);
+                Assert.Fail();
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                Assert.AreEqual(25, m.RaspoloživaPolja.Count());
+            }
+
+            try
+            {
+                m.UkloniPolje(-1, 2);
+                Assert.Fail();
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                Assert.AreEqual(25, m.RaspoloživaPolja.Count());
+            }
+        }
+
+        [TestMethod]
         public void Mreža_EliminirajPolje_NeBacaIznimkuZaVećEliminiranoPoljeUnutarMreže()
         {
             Mreža m = new Mreža(5, 5);
-            m.UkloniPolje(1, 2);
-            m.UkloniPolje(1, 2);
+            m.UkloniPolje(2, 1);
+            m.UkloniPolje(2, 1);
             IEnumerable<Polje> polja = m.RaspoloživaPolja;
             Assert.AreEqual(24, polja.Count());
-            Assert.IsFalse(polja.Contains(new Polje(1, 2)));
+            Assert.IsFalse(polja.Contains(new Polje(2, 1)));
         }
     }
 }

@@ -9,7 +9,7 @@ namespace PrikazFlote
         public FormFlota()
         {
             InitializeComponent();
-            mrežaZaFlotu.ZadajMrežu(redaka, stupaca);
+            mrežaZaFlotu.ZadajMrežu(stupaca, redaka);
         }
 
         private void botunSloži_Click(object sender, EventArgs e)

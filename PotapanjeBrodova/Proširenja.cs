@@ -12,8 +12,8 @@ namespace PotapanjeBrodova
             if (polja.Count() <= 1)
                 return polja;
             Polje prvo = polja.First();
-            bool vodoravnoPoravnata = polja.Skip(1).All(p => p.Redak == prvo.Redak);
             bool uspravnoPoravnata = polja.Skip(1).All(p => p.Stupac == prvo.Stupac);
+            bool vodoravnoPoravnata = polja.Skip(1).All(p => p.Redak == prvo.Redak);
             if (vodoravnoPoravnata == uspravnoPoravnata)
                 throw new ArgumentException();
             return polja.OrderBy(p => p.Redak + p.Stupac);

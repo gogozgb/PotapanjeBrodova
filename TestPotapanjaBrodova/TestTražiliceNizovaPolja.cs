@@ -24,11 +24,11 @@ namespace TestPotapanjaBrodova
             // polje [0, 0] smije se pojaviti samo jednom
             Assert.AreEqual(1, nizovi.Count(n => n.Contains(new Polje(0, 0))));
             // polje [0, 1] mora se pojaviti dva puta
-            Assert.AreEqual(2, nizovi.Count(n => n.Contains(new Polje(0, 1))));
+            Assert.AreEqual(2, nizovi.Count(n => n.Contains(new Polje(1, 0))));
             // polje [0, 2] mora se pojaviti dva puta
-            Assert.AreEqual(2, nizovi.Count(n => n.Contains(new Polje(0, 2))));
+            Assert.AreEqual(2, nizovi.Count(n => n.Contains(new Polje(2, 0))));
             // polje [0, 3] smije se pojaviti samo jednom
-            Assert.AreEqual(1, nizovi.Count(n => n.Contains(new Polje(0, 3))));
+            Assert.AreEqual(1, nizovi.Count(n => n.Contains(new Polje(3, 0))));
         }
 
         [TestMethod]
@@ -44,13 +44,13 @@ namespace TestPotapanjaBrodova
             // polje [0, 0] smije se pojaviti samo jednom
             Assert.AreEqual(1, nizovi.Count(n => n.Contains(new Polje(0, 0))));
             // polje [1, 0] mora se pojaviti dva puta
-            Assert.AreEqual(2, nizovi.Count(n => n.Contains(new Polje(1, 0))));
+            Assert.AreEqual(2, nizovi.Count(n => n.Contains(new Polje(0, 1))));
             // polje [2, 0] mora se pojaviti tri puta
-            Assert.AreEqual(3, nizovi.Count(n => n.Contains(new Polje(2, 0))));
+            Assert.AreEqual(3, nizovi.Count(n => n.Contains(new Polje(0, 2))));
             // polje [3, 0] smije se pojaviti dva puta
-            Assert.AreEqual(2, nizovi.Count(n => n.Contains(new Polje(3, 0))));
+            Assert.AreEqual(2, nizovi.Count(n => n.Contains(new Polje(0, 3))));
             // polje [4, 0] smije se pojaviti samo jednom
-            Assert.AreEqual(1, nizovi.Count(n => n.Contains(new Polje(4, 0))));
+            Assert.AreEqual(1, nizovi.Count(n => n.Contains(new Polje(0, 4))));
         }
 
         [TestMethod]
@@ -70,11 +70,11 @@ namespace TestPotapanjaBrodova
             TražilicaNizovaPolja tražilica = new TražilicaNizovaPolja(m);
             var poljaIznad = tražilica.DajPoljaUNastavku(new Polje(5, 5), Smjer.Gore);
             Assert.AreEqual(5, poljaIznad.Count());
-            Assert.IsTrue(poljaIznad.Contains(new Polje(4, 5)));
-            Assert.IsTrue(poljaIznad.Contains(new Polje(3, 5)));
-            Assert.IsTrue(poljaIznad.Contains(new Polje(2, 5)));
-            Assert.IsTrue(poljaIznad.Contains(new Polje(1, 5)));
-            Assert.IsTrue(poljaIznad.Contains(new Polje(0, 5)));
+            Assert.IsTrue(poljaIznad.Contains(new Polje(5, 4)));
+            Assert.IsTrue(poljaIznad.Contains(new Polje(5, 3)));
+            Assert.IsTrue(poljaIznad.Contains(new Polje(5, 2)));
+            Assert.IsTrue(poljaIznad.Contains(new Polje(5, 1)));
+            Assert.IsTrue(poljaIznad.Contains(new Polje(5, 0)));
         }
 
         [TestMethod]
@@ -84,9 +84,9 @@ namespace TestPotapanjaBrodova
             TražilicaNizovaPolja tražilica = new TražilicaNizovaPolja(m);
             var poljaIznad = tražilica.DajPoljaUNastavku(new Polje(5, 5), Smjer.Gore);
             Assert.AreEqual(5, poljaIznad.Count());
-            Assert.IsTrue(poljaIznad.Contains(new Polje(4, 5)));
-            Assert.IsTrue(poljaIznad.Contains(new Polje(3, 5)));
-            Assert.IsTrue(poljaIznad.Contains(new Polje(2, 5)));
+            Assert.IsTrue(poljaIznad.Contains(new Polje(5, 4)));
+            Assert.IsTrue(poljaIznad.Contains(new Polje(5, 3)));
+            Assert.IsTrue(poljaIznad.Contains(new Polje(5, 2)));
         }
 
         [TestMethod]
@@ -95,7 +95,7 @@ namespace TestPotapanjaBrodova
             Mreža m = new Mreža(10, 10);
             TražilicaNizovaPolja tražilica = new TražilicaNizovaPolja(m);
             var poljaIznad = tražilica.DajPoljaUNastavku(new Polje(5, 5), Smjer.Gore);
-            Assert.AreEqual(new Polje(4, 5), poljaIznad.First());
+            Assert.AreEqual(new Polje(5, 4), poljaIznad.First());
         }
 
         [TestMethod]
@@ -105,8 +105,8 @@ namespace TestPotapanjaBrodova
             TražilicaNizovaPolja tražilica = new TražilicaNizovaPolja(m);
             var poljaDesno = tražilica.DajPoljaUNastavku(new Polje(5, 5), Smjer.Desno);
             Assert.AreEqual(4, poljaDesno.Count());
-            Assert.IsTrue(poljaDesno.Contains(new Polje(5, 6)));
-            Assert.IsTrue(poljaDesno.Contains(new Polje(5, 9)));
+            Assert.IsTrue(poljaDesno.Contains(new Polje(6, 5)));
+            Assert.IsTrue(poljaDesno.Contains(new Polje(9, 5)));
         }
 
         [TestMethod]
@@ -115,7 +115,7 @@ namespace TestPotapanjaBrodova
             Mreža m = new Mreža(10, 10);
             TražilicaNizovaPolja tražilica = new TražilicaNizovaPolja(m);
             var poljaDesno = tražilica.DajPoljaUNastavku(new Polje(5, 5), Smjer.Desno);
-            Assert.AreEqual(new Polje(5, 6), poljaDesno.First());
+            Assert.AreEqual(new Polje(6, 5), poljaDesno.First());
         }
 
         [TestMethod]
@@ -125,8 +125,8 @@ namespace TestPotapanjaBrodova
             TražilicaNizovaPolja tražilica = new TražilicaNizovaPolja(m);
             var poljaIspod = tražilica.DajPoljaUNastavku(new Polje(5, 5), Smjer.Dolje);
             Assert.AreEqual(4, poljaIspod.Count());
-            Assert.IsTrue(poljaIspod.Contains(new Polje(6, 5)));
-            Assert.IsTrue(poljaIspod.Contains(new Polje(9, 5)));
+            Assert.IsTrue(poljaIspod.Contains(new Polje(5, 6)));
+            Assert.IsTrue(poljaIspod.Contains(new Polje(5, 9)));
         }
 
         [TestMethod]
@@ -135,7 +135,7 @@ namespace TestPotapanjaBrodova
             Mreža m = new Mreža(10, 10);
             TražilicaNizovaPolja tražilica = new TražilicaNizovaPolja(m);
             var poljaIspod = tražilica.DajPoljaUNastavku(new Polje(5, 5), Smjer.Dolje);
-            Assert.AreEqual(new Polje(6, 5), poljaIspod.First());
+            Assert.AreEqual(new Polje(5, 6), poljaIspod.First());
         }
 
     }
