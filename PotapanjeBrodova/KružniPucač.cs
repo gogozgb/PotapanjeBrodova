@@ -54,8 +54,11 @@ namespace PotapanjeBrodova
             }
             // sortira po duljinama nizova
             var sortiraneGrupe = nizoviPolja.GroupBy(niz => niz).OrderByDescending(niz => niz.Count());
-            // filtrira samo nizove koji su najveće duljine ili diljine veće od duljine broda i vraća prve članove
-            var filtriraneGrupe = sortiraneGrupe.TakeWhile(grupa => grupa.Key.Count() == sortiraneGrupe.First().Key.Count() || grupa.Key.Count() >= duljinaBroda - 1);
+            int najdulji = sortiraneGrupe.First().Key.Count();
+            // filtrira samo nizove koji su najveće duljine ili duljine veće 
+            // od duljine broda
+            var filtriraneGrupe = sortiraneGrupe.TakeWhile(grupa => grupa.Key.Count() == najdulji || grupa.Key.Count() >= duljinaBroda - 1);
+            // vraća prve članove, tj. polja uz prvo pogođeno
             return filtriraneGrupe.Select(grupa => grupa.Key.First());
         }
 
