@@ -48,14 +48,15 @@ namespace PotapanjeBrodova
             ListePolja nizoviPolja = new ListePolja();
             foreach (Smjer smjer in Enum.GetValues(typeof(Smjer)))
             {
-                var nizPolja = tražilica.DajPoljaDo(pogođenaPolja.First(), duljinaBroda - 1, smjer);
+                var nizPolja = tražilica.DajPoljaUNastavku(pogođenaPolja.First(), smjer);
                 if (nizPolja.Count() >= 0)
                     nizoviPolja.Add(nizPolja);
             }
             // sortira po duljinama nizova
             var sortiraneGrupe = nizoviPolja.GroupBy(niz => niz).OrderByDescending(niz => niz.Count());
-            // filtrira samo nizove koji su najveće duljine i vraća prve članove
-            return sortiraneGrupe.TakeWhile(grupa => grupa.Key.Count() == sortiraneGrupe.First().Key.Count()).Select(grupa => grupa.Key.First());
+            // filtrira samo nizove koji su najveće duljine ili diljine veće od duljine broda i vraća prve članove
+            var filtriraneGrupe = sortiraneGrupe.TakeWhile(grupa => grupa.Key.Count() == sortiraneGrupe.First().Key.Count() || grupa.Key.Count() >= duljinaBroda - 1);
+            return filtriraneGrupe.Select(grupa => grupa.Key.First());
         }
 
         private readonly Mreža mreža;
