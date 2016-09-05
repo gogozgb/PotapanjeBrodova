@@ -52,14 +52,14 @@ namespace PotapanjeBrodova
                 if (nizPolja.Count() >= 0)
                     nizoviPolja.Add(nizPolja);
             }
-            // sortira po duljinama nizova
-            var sortiraneGrupe = nizoviPolja.GroupBy(niz => niz).OrderByDescending(niz => niz.Count());
-            int najdulji = sortiraneGrupe.First().Key.Count();
-            // filtrira samo nizove koji su najveće duljine ili duljine veće 
-            // od duljine broda
-            var filtriraneGrupe = sortiraneGrupe.TakeWhile(grupa => grupa.Key.Count() == najdulji || grupa.Key.Count() >= duljinaBroda - 1);
-            // vraća prve članove, tj. polja uz prvo pogođeno
-            return filtriraneGrupe.Select(grupa => grupa.Key.First());
+            // traži najdulji niz
+            int najdulji = nizoviPolja.Max(niz => niz.Count());
+            // odabire samo nizove koji su duljine veće od duljine broda - 1
+            // ili su najveće duljine
+            int granica = Math.Min(najdulji, duljinaBroda - 1);
+            var probraniNizovi = nizoviPolja.Where(niz => niz.Count() >= granica);
+            // vraća prve članove nizova, tj. polja uz prvo pogođeno
+            return probraniNizovi.Select(niz => niz.First());
         }
 
         private readonly Mreža mreža;
