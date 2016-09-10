@@ -7,9 +7,9 @@ namespace PotapanjeBrodova
 {
     using ListePolja = List<IEnumerable<Polje>>;
 
-    public class KružniPucač : IPucač
+    public class Kružitelj : IPucač
     {
-        public KružniPucač(Mreža mreža, int duljinaBroda, Polje pogođenoPolje)
+        public Kružitelj(Mreža mreža, int duljinaBroda, Polje pogođenoPolje)
         {
             this.mreža = mreža;
             this.duljinaBroda = duljinaBroda;
