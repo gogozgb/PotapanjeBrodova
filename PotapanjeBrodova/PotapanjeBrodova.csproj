@@ -48,6 +48,7 @@
     <Compile Include="IPucač.cs" />
     <Compile Include="Napipač.cs" />
     <Compile Include="NasumičniIzbornikPolja.cs" />
+    <Compile Include="Tamanitelj.cs" />
     <Compile Include="TražilicaNizovaPolja.cs" />
     <Compile Include="Proširenja.cs" />
     <Compile Include="ČistačPolja.cs" />
